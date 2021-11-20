@@ -30,7 +30,7 @@ def test():
         print(form.name.data)
         print(form.review.data)
         return redirect(url_for("test"))
-    return render_template("reviews/addreview.html", form=form)
+    return render_template("reviews/templates/admin/addreview.html", form=form)
 
 @app.route('/admin/reviews', methods=["GET", "POST"])
 def reviews():
@@ -70,6 +70,17 @@ def add_review():
         "review": request.get_json()["description"]
     })
     return "OK"
+
+@app.route('/admin/addreview', methods=["GET", "POST"])
+def add_admin_review():
+    form = AddReviewForm()
+    if form.validate_on_submit():
+        collections_reviews.insert_one({
+            "name": form.name.data,
+            "review": form.review.data
+        })
+        return redirect(url_for("reviews"))
+    return render_template("admin/addreview.html", form=form)
 
 # @app.route('/addreview', methods=["GET", "POST"])
 # def add_review():
