@@ -17,11 +17,12 @@
             Контакты
           </router-link>
         </div>
-        <div :class="showPhone ? 'phone-show'  : 'phone-hide'" class="text-nowrap ml-0 ml-xl-5 d-none d-xl-block overflow-hidden">
-            <a href="tel:89535823354" class="d-none phone-number text-white d-xl-block">
-              +7-912-345-67-89
-            </a>
-            <span class="decor-underline text-white">
+        <div :class="showPhone ? 'phone-show'  : 'phone-hide'"
+             class="text-nowrap ml-0 ml-xl-5 d-none d-xl-block overflow-hidden">
+          <a class="d-none phone-number text-white d-xl-block" href="tel:89535823354">
+            +7-912-345-67-89
+          </a>
+          <span class="decor-underline text-white">
               Обратный звонок
             </span>
         </div>
@@ -29,7 +30,7 @@
         </button>
       </b-container>
     </div>
-    <router-view style="height: 200vh"/>
+    <router-view/>
   </div>
 </template>
 
@@ -149,7 +150,7 @@ export default {
   transition: all .3s ease;
 }
 
-.phone-number{
+.phone-number {
   font-size: 22px;
   line-height: 1;
 }

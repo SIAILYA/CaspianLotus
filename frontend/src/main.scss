@@ -6,6 +6,10 @@
   --text-color: #151515;
 }
 
+html, body{
+  color: #151515;
+}
+
 .decor-underline {
   text-decoration: underline;
 }
@@ -40,4 +44,9 @@
 .form-control:focus {
   box-shadow: 0 0 0 0.2rem rgba(255, 67, 153, 0.15) !important;
   border-color: rgba(255, 67, 153, 0.5) !important;;
+}
+
+
+::selection{
+  background: rgba(255, 67, 153, 0.7);
 }
