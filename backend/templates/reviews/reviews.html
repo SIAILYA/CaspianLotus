@@ -14,13 +14,6 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
-    <title>Admin panel</title>
-    <style>
-        body {
-            background: #FFF;
-            color: #2D2D2D;
-        }
-    </style>
 </head>
 <body>
     <div class="row gy-3">
@@ -53,10 +46,10 @@
           </div>
 
           <div class="new-text text-start p-3">
-            {% if review.description|length > 140 %}
-            {{ review.description[:140] }}...
+            {% if review.review|length > 140 %}
+            {{ review.review[:140] }}...
             {% else %}
-            {{ review.description }}
+            {{ review.review }}
             {% endif %}
           </div>
         </a>
@@ -66,7 +59,7 @@
 
 
     <div class = "text-center">
-        <a class="btn btn-success" href="/addreview" role="button">Добавить отзыв</a>
+        <a class="btn btn-success" style="margin-top: 20px" href="/addreview" role="button">Добавить отзыв</a>
     </div>
 </body>
 </html>
