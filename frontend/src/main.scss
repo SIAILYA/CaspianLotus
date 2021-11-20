@@ -6,7 +6,7 @@
   --text-color: #151515;
 }
 
-html, body{
+html, body {
   color: #151515;
 }
 
@@ -36,9 +36,15 @@ html, body{
   }
 }
 
-.rose-button:hover {
+.rose-button:hover:not(:disabled) {
   background: var(--accent-rose-dark);
   transform: scale(1.01);
+}
+
+.rose-button:disabled {
+  opacity: 0.9;
+  filter: grayscale(0.8);
+  background: var(--accent-rose-dark);
 }
 
 .form-control:focus {
@@ -47,8 +53,22 @@ html, body{
 }
 
 
-::selection{
+::selection {
   background: rgba(255, 67, 153, 0.7);
+}
+
+.btn-primary {
+  background-color: var(--accent-rose) !important;
+  border-color: var(--accent-rose-dark) !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-rose-dark) !important;
+  border-color: var(--accent-rose-dark) !important;
+}
+
+.spinner-grow{
+  color: var(--accent-rose);
 }
 h1, h2, h3 {
   line-height: 1;

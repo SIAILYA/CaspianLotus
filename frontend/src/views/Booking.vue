@@ -1,15 +1,41 @@
 <template>
   <b-container class="header-pt text-center">
+    <b-modal id="modal-1" title="Спасибо!" no-close-on-esc no-close-on-backdrop hide-header-close ok-only>
+      <p class="my-2 text-center">
+        //После редиректа на платежную систему и обратно//
+        <br>
+        <br>
+        Ваша бронь записана! В скором времени мы с Вами свяжемся для уточнения деталей!
+      </p>
+      <template #modal-footer="{ }">
+        <b-button size="md" variant="primary" @click="$router.push('/')">
+          OK
+        </b-button>
+      </template>
+    </b-modal>
+    <b-modal id="modal-2" title="Ошибка!" no-close-on-esc no-close-on-backdrop hide-header-close ok-only>
+      <p class="my-4">
+        Во время обработки запроса произошла ошибка :(
+        <br>
+        <br>
+        Информация об ошибке автоматически отправлена, мы уже занимаемся решением проблемы! Извините за неудобства...
+      </p>
+      <template #modal-footer="{ }">
+        <b-button size="md" variant="primary" @click="$router.push('/')">
+          OK
+        </b-button>
+      </template>
+    </b-modal>
     <h1>
       Бронирование домиков
     </h1>
     <b-row class="justify-content-center">
       <div class="col-12 col-md-10 col-xl-8">
-        <div class="mt-4 booking-card">
+        <div class="mt-4 booking-card mb-4">
           <h4>Бронируйте заранее и получайте скидку!</h4>
           <b-row class="mt-4">
             <div class="col-12 col-md-6 d-flex">
-              <span class="text-nowrap mr-2 my-auto">Количество домиков</span>
+              <span class="text-nowrap mr-2 my-auto">Количество гостей</span>
               <input v-model="count" class="form-control w-50 mx-md-auto ml-auto my-auto" type="number"
                      @input="onChangeInfo">
             </div>
@@ -26,15 +52,66 @@
               </div>
             </div>
           </b-row>
-
-          <div :class="price ? 'show-price' : ''" class="result mt-3" style="height: 0">
-            Стоимость бронирования: {{}}
+        </div>
+      </div>
+      <div class="col-12">
+        <b-spinner v-if="loadVariants" type="grow" class="mt-3"></b-spinner>
+      </div>
+      <div class="col-12 col-md-10 col-xl-8">
+        <div v-if="!loadVariants && variantsInfo" class="variants">
+          <div class="row">
+            <div class="col-12 col-md-5 mb-3 mb-md-0">
+              <h4>Стандарт</h4>
+              <span>Номер с двумя спальными кроватями в домике из двух номеров</span>
+            </div>
+            <div class="col-6 col-md-3">
+              <h5>Доступно</h5>
+              <span class="available">{{ variantsInfo.standard }}</span>
+            </div>
+            <div class="col-6 col-md-4">
+              <h5>Количество бронирования</h5>
+              <input @input.prevent="inputBookCount"
+                     data-type="standard"
+                     type="number"
+                     class="form-control"
+                     :max="variantsInfo.standard"
+                     :value="toBookStandard"
+              >
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-12 col-md-5 mb-3 mb-md-0">
+              <h4>Люкс</h4>
+              <span>Номер с двумя спальными кроватями в домике из двух номеров</span>
+            </div>
+            <div class="col-6 col-md-3">
+              <h5>Доступно</h5>
+              <span class="available">{{ variantsInfo.lux }}</span>
+            </div>
+            <div class="col-6 col-md-4">
+              <h5>Количество бронирования</h5>
+              <input @input.prevent="inputBookCount"
+                     data-type="lux"
+                     type="number"
+                     class="form-control"
+                     :max="variantsInfo.lux"
+                     :value="toBookLux"
+              >
+            </div>
           </div>
         </div>
-
       </div>
     </b-row>
-    <button class="rose-button mt-4">Перейти к оплате</button>
+    <button class="rose-button mt-4" v-if="!loadVariants && variantsInfo"
+            :disabled="(toBookLux === '0' && toBookStandard === '0') || sending" @click="confirmBooking">
+      Перейти к оплате
+    </button>
+    <br>
+    <b-spinner v-if="sending" type="grow" class="mt-3"></b-spinner>
+    <div class="mt-3" v-if="(toBookLux === '0' && toBookStandard === '0') && variantsInfo && !loadVariants ">Выберете
+      количество номеров для бронирования!
+    </div>
     <section class="mt-5 houses-info">
       <h2>Информация о домиках</h2>
       <b-row class="justify-content-center mt-5">
@@ -66,6 +143,9 @@
 </template>
 
 <script>
+import {BACKEND} from "../backend.config";
+import axios from "axios";
+
 export default {
   name: "Booking",
   data() {
@@ -73,7 +153,12 @@ export default {
       count: 1,
       dateStart: this.getTomorrow(),
       dateEnd: null,
-      price: null
+      priceStandard: null,
+      loadVariants: null,
+      variantsInfo: null,
+      toBookLux: "0",
+      toBookStandard: "0",
+      sending: false
     }
   },
   methods: {
@@ -86,9 +171,56 @@ export default {
       return `${year}-${month}-${day}`
     },
     onChangeInfo() {
+      console.log(this.count, this.dateStart, this.dateEnd)
+
       if (this.count && this.dateStart && this.dateEnd) {
-        // get price
+        this.loadVariants = true
+
+        axios.get(BACKEND + "/api/get_prices")
+            .then(r => {
+              this.priceStandard = r.data[0].count
+              return axios.post(BACKEND + "/api/check_booking", {
+                count: this.count,
+                dateStart: this.dateStart,
+                dateEnd: this.dateEnd
+              })
+            })
+            .then(r => {
+              this.loadVariants = false
+              this.variantsInfo = r.data
+            })
       }
+    },
+    inputBookCount(e) {
+      const val = parseInt(e.target.value)
+      const max = parseInt(e.target.max)
+      console.log(val, max)
+      console.log(this.toBookLux, this.toBookStandard)
+      if (e.target.dataset.type === "standard") {
+        this.toBookStandard = (isNaN(val) ? 0 : val < 0 ? 0 : val > max ? max : val) + ""
+        e.target.value = this.toBookStandard
+      } else {
+        this.toBookLux = (isNaN(val) ? 0 : val < 0 ? 0 : val > max ? max : val) + ""
+        e.target.value = this.toBookLux
+      }
+      console.log(this.toBookLux, this.toBookStandard)
+    },
+    confirmBooking() {
+      this.sending = true
+
+      axios.post(BACKEND + "/api/confirm_booking", {
+        "count": this.count,
+        "dateStart": this.dateStart,
+        "dateEnd": this.dateEnd,
+        "lux": this.toBookLux,
+        "standard": this.toBookStandard
+      }).then(() => {
+        this.$bvModal.show("modal-1")
+        this.sending = false
+      }).catch(() => {
+        this.$bvModal.show("modal-2")
+        this.sending = false
+      })
     }
   },
 }
@@ -114,7 +246,7 @@ export default {
   height: 32px !important;
 }
 
-h1, h2, h4 {
+h1, h2, h4, h3, h5 {
   color: var(--blue-main)
 }
 
@@ -145,5 +277,20 @@ h1, h2, h4 {
   .houses-text {
     font-size: 24px;
   }
+}
+
+.show-variants {
+  height: auto !important;
+}
+
+.variants {
+  background: white;
+  box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.25);
+  border-radius: 35px;
+  padding: 16px 24px;
+}
+
+.available {
+  font-size: 24px;
 }
 </style>
