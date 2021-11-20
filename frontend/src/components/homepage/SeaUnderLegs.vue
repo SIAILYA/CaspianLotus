@@ -1,5 +1,5 @@
 <template>
-  <div class="container text-center">
+  <div class="container text-center" id="sea_under_legs">
     <h1 class="mt-5">Море под ногами</h1>
     <h2 class="text-center">
       База расположена на самом берегу Каспийского моря недалеко от города Астрахань и готова предложить своим посетителям уникальный отдых!

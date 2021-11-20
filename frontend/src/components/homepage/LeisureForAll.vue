@@ -1,5 +1,5 @@
 <template>
-  <div class="container text-center mt-5">
+  <div class="container text-center mt-5" id="attraction">
     <h1>
       Досуг на любой вкус
     </h1>

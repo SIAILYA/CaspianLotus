@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="fishing">
     <img src="@/assets/homepage/Vector.svg" class="shade w-100 position-relative" alt="">
     <section>
       <div class="container text-center">
@@ -25,7 +25,7 @@
                 Наши лодки и катера оборудованы двигателями различной мощности
               </p>
             </div>
-            <router-link tag="div" class="to-book col-lg-8 col-12 text-center p-4 d-md-inline-block mb-lg-4 mb-5 rose-button" to >Забронировать</router-link>
+            <router-link tag="div" class="to-book col-lg-8 col-12 text-center p-4 d-md-inline-block mb-lg-4 mb-5 rose-button" to="/booking" >Забронировать</router-link>
           </div>
         </div>
       </div>

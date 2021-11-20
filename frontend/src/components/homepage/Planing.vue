@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="planing">
     <img src="@/assets/homepage/Vector.svg" class="shade w-100 position-relative" alt="">
     <section>
       <div class="container text-center">
@@ -35,7 +35,7 @@
             <img class="col-5 my-auto d-md-block d-none pic-2" src="@/assets/homepage/food.png" alt="food">
           </div>
         </div>
-        <router-link tag="div" class="to-book col-md-7 col-sm-10 text-center d-md-inline-block mx-auto p-4 mt-4 mb-4 rose-button" to >Забронировать нужные даты</router-link>
+        <router-link tag="div" class="to-book col-md-7 col-sm-10 text-center d-md-inline-block mx-auto p-4 mt-4 mb-4 rose-button" to="/booking" >Забронировать нужные даты</router-link>
       </div>
     </section>
   </div>

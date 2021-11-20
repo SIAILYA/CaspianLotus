@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="footer">
     <div class="container text-center p-4 d-md-flex flex-md-row flex-column">
       <div class="col-md-4 col-12 row text-md-left text-center mb-md-0 mb-3 ">
         <img class="col-5" src="@/assets/footer/logo.svg" alt="logo">
@@ -8,19 +8,19 @@
       <div class="col-md-4 col-12 text-md-left text-center my-auto">
         <ul>
           <li>
-            <router-link class="footer-link" to>О базе отдыха</router-link>
+            <a class="footer-link" href="/">О базе отдыха</a>
           </li>
           <li>
-            <router-link class="footer-link" to>Досуг</router-link>
+            <a class="footer-link" href="/#attraction">Досуг</a>
           </li>
           <li>
-            <router-link class="footer-link" to>Рыбалка</router-link>
+            <a class="footer-link" href="/#fishing">Рыбалка</a>
           </li>
           <li>
-            <router-link class="footer-link" to>Отзывы</router-link>
+            <a class="footer-link" href="/#reviews">Отзывы</a>
           </li>
           <li>
-            <router-link class="footer-link" to>Фотогалерея</router-link>
+            <a class="footer-link" href="/#photos">Фотогалерея</a>
           </li>
         </ul>
       </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container text-center mt-5">
+  <div class="container text-center mt-5" id="reviews">
     <h1>
       Отзывы
     </h1>
@@ -30,7 +30,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-12 mt-md-0 mt-4">
+      <div class="col-lg-4 col-12 mt-lg-0 mt-4">
         <div class="review-card">
           <div class="d-flex">
             <img src="@/assets/homepage/reviewer.png" alt="reviewer">
@@ -53,7 +53,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-12 mt-md-0 mt-4">
+      <div class="col-lg-4 col-12 mt-lg-0 mt-4">
         <div class="review-card">
           <div class="d-flex">
             <img src="@/assets/homepage/reviewer.png" alt="reviewer">
@@ -89,7 +89,7 @@
           <p>
             Уже были в Каспийском Лотосе?<br>Расскажите другим, как провели время и поделитесь фотографиями, а мы подарим Вам скидку на следующее бронирование!
           </p>
-          <router-link tag="div" class="to-book col-md-8 col-12 text-center p-3 d-inline-block rose-button" to >Рассказать</router-link>
+          <router-link tag="div" class="to-book col-md-8 col-12 text-center p-3 d-inline-block rose-button" to="/booking">Рассказать</router-link>
         </div>
       </div>
       <div class="images col-md-5 col-12 position-relative p-2 my-auto">

@@ -1,6 +1,6 @@
 <template>
   <div class="container text-center mt-5">
-    <h1>
+    <h1 id="photos">
       Фотогалерея
     </h1>
     <h3>
