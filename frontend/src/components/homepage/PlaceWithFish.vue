@@ -9,7 +9,7 @@
           в нем водится множество видов рыб в огромном количестве!
         </h2>
         <div class="container d-flex flex-lg-row flex-column">
-          <img src="@/assets/homepage/man.png" class="col-lg-5 col-12" alt="man" @click="spinnerMan" ref="man">
+          <img src="@/assets/homepage/man.png" class="col-lg-5 col-12 man" alt="man" @click="spinnerMan" ref="man">
           <div class="p-and-button col-lg-7 col-12">
             <div class="text-left">
               <p>
