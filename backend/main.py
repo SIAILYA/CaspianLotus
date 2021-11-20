@@ -41,7 +41,8 @@ def reviews():
 def edit_review(id):
     edit_review_form = EditReviewForm()
     review = collections_reviews.find({"_id": ObjectId(id)})[0]
-    #edit_review_form.review.data = review["review"]
+    if request.method == "GET":
+        edit_review_form.review.data = review["review"]
 
     if edit_review_form.validate_on_submit():
         if "delete" in request.form:
