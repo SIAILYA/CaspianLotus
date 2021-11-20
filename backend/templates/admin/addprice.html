@@ -1,0 +1,20 @@
+{% extends 'admin/header.html' %}
+
+{% block content %}
+<form action="" method="post" novalidate enctype="multipart/form-data">
+     {{ form.hidden_tag() }}
+    <div class="input-group mb-3">
+        <span class="input-group-text">{{ form.name.label }}</span>
+        {{ form.name(class="form-control") }}
+    </div>
+
+    <div class="input-group mb-3">
+    <span class="input-group-text">{{ form.count.label }}</span>
+    {{ form.count(class="form-control") }}
+  </div>
+
+  <div class="mb-3">
+    {{ form.submit(class="btn btn-success btn-md mb-2") }}
+  </div>
+</form>
+{% endblock %}
