@@ -10,7 +10,6 @@ class MessageForm(FlaskForm):
 
 class AddReviewForm(FlaskForm):
     name = StringField("Имя: ", validators=[DataRequired()])
-    surname = StringField("Email: ", validators=[DataRequired()])
-    review = TextAreaField("Message: ", validators=[DataRequired()])
-    sumbit = SubmitField("Submit")
+    review = TextAreaField("Отзыв: ", validators=[DataRequired()])
+    submit = SubmitField("Submit")
 
