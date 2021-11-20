@@ -3,7 +3,7 @@
     <div class="d-flex flex-row justify-content-between">
       <!-- logo -->
       <div class="logo d-flex" onclick="document.location.href = '/'">
-        <img src="@/assets/header/Logo.svg">
+        <img src="@/assets/Logo.svg">
         <p>Каспийский<br>Лотос</p>
       </div>
       <!-- contacts -->
@@ -23,19 +23,7 @@
           <a href="/">О нас</a>
         </li>
         <li>
-          <a href="/photo_reports">Фотоотчёты</a>
-        </li>
-        <li>
-          <a href="/leisure">Досуг</a>
-        </li>
-        <li>
-          <a href="/fishing">Рыбалка</a>
-        </li>
-        <li>
-          <a href="/reviews">Отзывы</a>
-        </li>
-        <li>
-          <a href="/roadmap">Карта развития</a>
+          <a href="/booking">Бронирование</a>
         </li>
         <li>
           <a href="/contacts">Контакты</a>

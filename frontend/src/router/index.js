@@ -1,12 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Leisure from "@/views/Leisure";
-import About from "@/views/About";
-import PhotoReports from "@/views/PhotoReports";
-import Fishing from "@/views/Fishing";
-import Roadmap from "@/views/Roadmap";
+import Main from "@/views/Main";
 import Contacts from "@/views/Contacts";
-import Reviews from "@/views/Reviews";
+import Booking from "@/views/Booking";
 
 Vue.use(VueRouter)
 
@@ -14,32 +10,12 @@ const routes = [
   {
     path: '/',
     name: 'About',
-    component: About
+    component: Main
   },
   {
-    path: '/photo_reports',
-    name: 'PhotoReports',
-    component: PhotoReports
-  },
-  {
-    path: '/leisure',
-    name: 'Leisure',
-    component: Leisure
-  },
-  {
-    path: '/fishing',
-    name: 'Fishing',
-    component: Fishing
-  },
-  {
-    path: '/reviews',
-    name: 'Reviews',
-    component: Reviews
-  },
-  {
-    path: '/roadmap',
-    name: 'Roadmap',
-    component: Roadmap
+    path: '/booking',
+    name: 'Booking',
+    component: Booking
   },
   {
     path: '/contacts',

@@ -1,10 +1,10 @@
 <template>
-  <h1 class="text-center">О нас</h1>
+  <h1 class="text-center">Booking</h1>
 </template>
 
 <script>
 export default {
-  name: "About"
+  name: "Booking"
 }
 </script>
 
