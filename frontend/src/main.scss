@@ -1,10 +1,47 @@
-:root{
+:root {
   --blue-main: #032560;
   --blue-secondary: #0073A3;
   --accent-rose: #FF4399;
+  --accent-rose-dark: #e53b89;
   --text-color: #151515;
 }
 
-.decor-underline{
+.decor-underline {
   text-decoration: underline;
+}
+
+.header-pt {
+  padding-top: 100px;
+}
+
+.rose-button {
+  padding: 14px 24px;
+  background: #FF4399;
+  box-shadow: 0px 0px 24px rgba(255, 67, 153, 0.9);
+  border-radius: 43px;
+  font-size: 26px;
+  color: white;
+  border: none;
+  outline: none;
+  transition: all .3s ease;
+}
+
+@media screen and (max-width: 768px) {
+  .rose-button {
+    font-size: 20px;
+  }
+}
+
+.rose-button:hover {
+  background: var(--accent-rose-dark);
+  transform: scale(1.01);
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 67, 153, 0.15) !important;
+  border-color: rgba(255, 67, 153, 0.5) !important;;
+}
+
+h1, h2, h4 {
+  color: var(--blue-main)
 }
