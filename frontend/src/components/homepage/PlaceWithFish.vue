@@ -9,7 +9,7 @@
           в нем водится множество видов рыб в огромном количестве!
         </h2>
         <div class="container d-flex flex-lg-row flex-column">
-          <img src="@/assets/homepage/man.png" class="col-lg-5 col-12" alt="man">
+          <img src="@/assets/homepage/man.png" class="col-lg-5 col-12" alt="man" @click="spinnerMan" ref="man">
           <div class="p-and-button col-lg-7 col-12">
             <div class="text-left">
               <p>
@@ -25,7 +25,7 @@
                 Наши лодки и катера оборудованы двигателями различной мощности
               </p>
             </div>
-            <router-link tag="div" class="to-book col-lg-8 col-12 text-center p-4 d-md-inline-block mb-lg-4 mb-5" to >Забронировать</router-link>
+            <router-link tag="div" class="to-book col-lg-8 col-12 text-center p-4 d-md-inline-block mb-lg-4 mb-5 rose-button" to >Забронировать</router-link>
           </div>
         </div>
       </div>
@@ -35,7 +35,15 @@
 
 <script>
 export default {
-  name: "PlaceWithFish"
+  name: "PlaceWithFish",
+  methods: {
+    spinnerMan() {
+      if (!this.$refs.man.classList.contains("spinnerMan"))
+        this.$refs.man.classList.add("spinnerMan")
+      else
+        this.$refs.man.classList.remove("spinnerMan")
+    }
+  }
 }
 </script>
 
@@ -75,5 +83,24 @@ section {
     border-radius: 40px;
     box-shadow: 0 0 24px rgba(255, 67, 153, 0.9);
   }
+}
+.man {
+  transform: rotate(3deg);
+  transition: all .3s ease;
+}
+.man:hover {
+  transform: rotate(-7deg) scale(1.05);
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+.spinnerMan {
+  animation: spinner 2s linear infinite;
+  transition: 0s;
 }
 </style>

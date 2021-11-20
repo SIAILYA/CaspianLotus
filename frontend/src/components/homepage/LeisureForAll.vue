@@ -61,5 +61,12 @@ div {
   .row div {
     margin: auto 0;
   }
+  img {
+    transition: all .3s ease;
+    transform: rotate(0);
+  }
+  img:hover {
+    transform: rotate(random(14) - 7 + deg) scale(1.01);
+  }
 }
 </style>

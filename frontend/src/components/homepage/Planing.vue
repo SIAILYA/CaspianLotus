@@ -19,7 +19,7 @@
                 Построим детскую площадку и орагнизуем инфраструктуру для сап-туров в Каспийском море
               </p>
             </div>
-            <img class="col-5 my-auto d-md-block d-none" src="@/assets/homepage/surfing.png" alt="surfing">
+            <img class="col-5 my-auto d-md-block d-none pic-1" src="@/assets/homepage/surfing.png" alt="surfing">
           </div>
           <div class="d-flex flex-row mt-5">
             <div class="col-2 text-center">
@@ -32,10 +32,10 @@
                 Оборудуем небольшую столовую на 20 человек. В разгар сезона в столовой будут подаваться блюда из свежей рыбы и дичи
               </p>
             </div>
-            <img class="col-5 my-auto d-md-block d-none" src="@/assets/homepage/food.png" alt="food">
+            <img class="col-5 my-auto d-md-block d-none pic-2" src="@/assets/homepage/food.png" alt="food">
           </div>
         </div>
-        <router-link tag="div" class="to-book col-md-7 col-sm-10 text-center d-md-inline-block mx-auto p-4 mt-4 mb-4" to >Забронировать нужные даты</router-link>
+        <router-link tag="div" class="to-book col-md-7 col-sm-10 text-center d-md-inline-block mx-auto p-4 mt-4 mb-4 rose-button" to >Забронировать нужные даты</router-link>
       </div>
     </section>
   </div>
@@ -103,5 +103,14 @@ p {
 h4 {
   font-size: 14px;
   line-height: 24px;
+}
+img {
+  transition: all .3s ease;
+}
+.pic-1:hover {
+  transform: rotate(5deg) scale(1.01);
+}
+.pic-2:hover {
+  transform: rotate(-5deg) scale(1.01);
 }
 </style>

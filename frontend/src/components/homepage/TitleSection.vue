@@ -6,7 +6,7 @@
     </div>
     <div class="container mt-5 text-center">
       <h2 class="col-12 mb-5">Приезжайте к нам<br><span class="pink-text">за новыми впечатлениями</span></h2>
-      <router-link tag="div" class="to-book col-lg-4 col-12 p-4 d-md-inline-block" to >Забронировать</router-link>
+      <router-link tag="div" class="to-book col-lg-4 col-12 p-4 d-md-inline-block rose-button" to >Забронировать</router-link>
     </div>
   </section>
 </template>

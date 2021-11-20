@@ -61,15 +61,37 @@ div {
       left: 0;
     }
     #pic_1 {
+      transform: rotate(3deg);
+      transition: all .3s ease;
+    }
+    #pic_1:hover {
+      transform: rotate(-7deg) scale(1.05);
     }
     #pic_2 {
+      transform: rotate(15deg);
+      transition: all .3s ease;
       top: 70px;
     }
+    #pic_2:hover {
+      transform: rotate(-7deg) scale(1.05);
+    }
     #pic_3 {
+      transform: rotate(3deg);
+      transition: all .3s ease;
       top: 140px;
+    }
+    #pic_3:hover {
+      transform: rotate(10deg) scale(1.05);
     }
   }
 }
+
+.houses-photo-2 {
+}
+
+.houses-photo-2:hover {
+}
+
 @media screen and (max-width: 993px) {
   .p-series {
     margin: 0;

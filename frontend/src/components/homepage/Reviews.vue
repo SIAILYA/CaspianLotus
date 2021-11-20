@@ -10,7 +10,7 @@
       <div class="col-lg-4 col-12">
         <div class="review-card">
           <div class="d-flex">
-            <img src="@/assets/homepage/reviewer.png" alt="reviewer" width="25%" height="25%">
+            <img src="@/assets/homepage/reviewer.png" alt="reviewer">
             <div class="user-data my-auto flex-column text-left ml-2">
               <h4>
                 Юлия Андреева
@@ -30,10 +30,10 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-12 mt-4">
+      <div class="col-lg-4 col-12 mt-md-0 mt-4">
         <div class="review-card">
           <div class="d-flex">
-            <img src="@/assets/homepage/reviewer.png" alt="reviewer" width="25%" height="25%">
+            <img src="@/assets/homepage/reviewer.png" alt="reviewer">
             <div class="user-data my-auto flex-column text-left ml-2">
               <h4>
                 Юлия Андреева
@@ -53,10 +53,10 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-12 mt-4">
+      <div class="col-lg-4 col-12 mt-md-0 mt-4">
         <div class="review-card">
           <div class="d-flex">
-            <img src="@/assets/homepage/reviewer.png" alt="reviewer" width="25%" height="25%">
+            <img src="@/assets/homepage/reviewer.png" alt="reviewer">
             <div class="user-data my-auto flex-column text-left ml-2">
               <h4>
                 Юлия Андреева
@@ -89,7 +89,7 @@
           <p>
             Уже были в Каспийском Лотосе?<br>Расскажите другим, как провели время и поделитесь фотографиями, а мы подарим Вам скидку на следующее бронирование!
           </p>
-          <router-link tag="div" class="to-book col-md-8 col-12 text-center p-3 d-inline-block" to >Рассказать</router-link>
+          <router-link tag="div" class="to-book col-md-8 col-12 text-center p-3 d-inline-block rose-button" to >Рассказать</router-link>
         </div>
       </div>
       <div class="images col-md-5 col-12 position-relative p-2 my-auto">
@@ -178,6 +178,14 @@ div {
   img {
     position: absolute;
     left: 0;
+    transform: rotate(0);
+    transition: all .3s ease;
+  }
+  #pic_1:hover {
+    transform: rotate(-7deg) scale(1.01);
+  }
+  #pic_2:hover {
+    transform: rotate(2deg) scale(1.01);
   }
   #pic_2 {
     top: 160px;
