@@ -6,8 +6,8 @@
     <h3>
       Наши гости рассказывают почему любят Каспийский Лотос и делятся своими впечатлениями
     </h3>
-    <div class="row mt-4 justify-content-between">
-      <div class="col-4">
+    <div class="d-flex flex-lg-row flex-column mt-4 justify-content-between">
+      <div class="col-lg-4 col-12">
         <div class="review-card">
           <div class="d-flex">
             <img src="@/assets/homepage/reviewer.png" alt="reviewer" width="25%" height="25%">
@@ -30,7 +30,7 @@
           </div>
         </div>
       </div>
-      <div class="col-4">
+      <div class="col-lg-4 col-12 mt-4">
         <div class="review-card">
           <div class="d-flex">
             <img src="@/assets/homepage/reviewer.png" alt="reviewer" width="25%" height="25%">
@@ -53,7 +53,7 @@
           </div>
         </div>
       </div>
-      <div class="col-4">
+      <div class="col-lg-4 col-12 mt-4">
         <div class="review-card">
           <div class="d-flex">
             <img src="@/assets/homepage/reviewer.png" alt="reviewer" width="25%" height="25%">
@@ -80,8 +80,8 @@
     <router-link tag="div" class="more-reviews mt-4" to="/">
       Больше отзывов
     </router-link>
-    <div class="row">
-      <div class="p-4 mt-4 col-7 text-center">
+    <div class="d-flex flex-md-row flex-column-reverse">
+      <div class="p-4 mt-4 col-md-7 col-12 text-center">
         <div class="share my-auto p-3">
           <h1>
             Поделитесь своей поездкой!
@@ -89,10 +89,10 @@
           <p>
             Уже были в Каспийском Лотосе?<br>Расскажите другим, как провели время и поделитесь фотографиями, а мы подарим Вам скидку на следующее бронирование!
           </p>
-          <router-link tag="div" class="to-book col-5 text-center p-3 d-md-inline-block" to >Рассказать</router-link>
+          <router-link tag="div" class="to-book col-md-8 col-12 text-center p-3 d-inline-block" to >Рассказать</router-link>
         </div>
       </div>
-      <div class="images col-5 position-relative p-2">
+      <div class="images col-md-5 col-12 position-relative p-2 my-auto">
         <img class="w-100" id="pic_1" src="@/assets/homepage/plane.png" alt="">
         <img class="w-100" id="pic_2" src="@/assets/homepage/houses.png" alt="">
       </div>
@@ -174,6 +174,7 @@ div {
   box-shadow: 0 0 10px rgba(0,0,0,.3);
 }
 .images {
+  aspect-ratio: .9;
   img {
     position: absolute;
     left: 0;

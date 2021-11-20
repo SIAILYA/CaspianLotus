@@ -8,9 +8,9 @@
           Каспийское море - одно из лучших мест для рыбалки в мире -
           в нем водится множество видов рыб в огромном количестве!
         </h2>
-        <div class="container d-flex flex-row">
-          <img src="@/assets/homepage/man.png" class="col-5" alt="man">
-          <div class="p-and-button col-7">
+        <div class="container d-flex flex-lg-row flex-column">
+          <img src="@/assets/homepage/man.png" class="col-lg-5 col-12" alt="man">
+          <div class="p-and-button col-lg-7 col-12">
             <div class="text-left">
               <p>
                 У нас водятся сом, сазан, жерех и еще десятки других видов рыб
@@ -25,7 +25,7 @@
                 Наши лодки и катера оборудованы двигателями различной мощности
               </p>
             </div>
-            <router-link tag="div" class="to-book col-8 text-center p-4 d-md-inline-block" to >Забронировать</router-link>
+            <router-link tag="div" class="to-book col-lg-8 col-12 text-center p-4 d-md-inline-block mb-lg-4 mb-5" to >Забронировать</router-link>
           </div>
         </div>
       </div>
@@ -52,18 +52,15 @@ section {
   h1 {
     font-weight: 600;
     font-size: 36px;
-    line-height: 54px;
   }
   h2 {
     font-weight: 500;
     font-size: 24px;
-    line-height: 34px;
   }
   p {
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
-    line-height: 32px;
   }
   .p-and-button {
     margin: auto 0;
@@ -73,12 +70,10 @@ section {
     font-weight: 600;
     font-size: 30px;
     color: #fff;
-    line-height: 37px;
     text-decoration: none;
     background: rgba(255, 67, 153, 1);
     border-radius: 40px;
     box-shadow: 0 0 24px rgba(255, 67, 153, 0.9);
-    margin-top: 15%;
   }
 }
 </style>

@@ -6,9 +6,9 @@
     <h3>
       Главное, за чем приезжают на нашу базу - это рыбалка.<br>Но помимо этого у нас множество других активностей!
     </h3>
-    <div class="d-flex flex-row row mt-2">
-      <img class="col-6" src="@/assets/homepage/lotuses.png" alt="lotuses">
-      <div class="col-6 text-left">
+    <div class="d-flex flex-md-row flex-column row mt-2">
+      <img class="col-lg-6 col-12" src="@/assets/homepage/lotuses.png" alt="lotuses">
+      <div class="col-lg-6 col-12 text-left">
         <h2>
           Экскурсии на лотосовые поля
         </h2>
@@ -17,9 +17,9 @@
         </p>
       </div>
     </div>
-    <div class="d-flex flex-row-reverse row mt-2">
-      <img class="col-6" src="@/assets/homepage/bathhouse.png" alt="lotuses">
-      <div class="col-6 text-left">
+    <div class="d-flex flex-md-row-reverse flex-column row mt-2">
+      <img class="col-lg-6 col-12" src="@/assets/homepage/bathhouse.png" alt="lotuses">
+      <div class="col-lg-6 col-12 text-left">
         <h2>
           Настоящая русская баня
         </h2>
