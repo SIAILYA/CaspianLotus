@@ -7,3 +7,10 @@ class MessageForm(FlaskForm):
     email = StringField("Email: ", validators=[Email()])
     message = TextAreaField("Message: ", validators=[DataRequired()])
     sumbit = SubmitField("Submit")
+
+class AddReviewForm(FlaskForm):
+    name = StringField("Имя: ", validators=[DataRequired()])
+    surname = StringField("Email: ", validators=[DataRequired()])
+    review = TextAreaField("Message: ", validators=[DataRequired()])
+    sumbit = SubmitField("Submit")
+

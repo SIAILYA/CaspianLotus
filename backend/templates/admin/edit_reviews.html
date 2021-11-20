@@ -1,0 +1,45 @@
+{% extends 'admin/header.html' %}
+
+{% block content %}
+<div class="row">
+  {% for review in reviews %}
+  <div class="col-12 col-md-6 col-lg-4 mb-3" style="">
+    <a href="edit_review/{{ review._id }}" class="d-flex flex-column card"
+       style="
+             color: black;
+             cursor: pointer;
+             text-align: center;
+             background-color: #d9d9d9;
+             position: relative;
+             border-radius: 5px 5px 5px 5px;
+             text-decoration: none;
+             padding: 5px;
+             margin: auto;
+             height: 100%;"
+    >
+      <div
+          style="color: black; font-size: 18px; border-radius: 5px 5px 5px 5px;"
+      >
+        {% if review.name|length > 55 %}
+        {{ review.name[:55] }}...
+        {% else %}
+        {{ review.name }}
+        {% endif %}
+      </div>
+
+      <div class="new-text text-start p-3">
+        {% if review.description|length > 140 %}
+        {{ review.description[:140] }}...
+        {% else %}
+        {{ review.description }}
+        {% endif %}
+      </div>
+
+      <p class="text-end news-date mt-2">
+        {{ review.creation_date.strftime("%d.%m.%Y %X") }}
+      </p>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
