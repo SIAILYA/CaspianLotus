@@ -19,6 +19,10 @@ db_name = "Lotos"
 collections_admins = client[db_name]["PhotoReports"]
 collections_reviews = client[db_name]["reviews"]
 
+@app.route("/status", methods=["GET"])
+def status():
+    return "Caspian Lotus API is working"
+
 @app.route('/admin', methods=["GET", "POST"])
 def index():
     return render_template("admin/header.html")
