@@ -6,9 +6,9 @@
     </h2>
     <div class="container d-flex flex-row">
       <div class="picture-set col-5 position-relative">
-        <img class="w-100" id="pic_1" src="@/assets/homepage/boards.png">
-        <img class="w-100" id="pic_2" src="@/assets/homepage/sea.png">
-        <img class="w-100" id="pic_3" src="@/assets/homepage/lotus.png">
+        <img class="w-100" id="pic_1" src="@/assets/homepage/boards.png" alt="">
+        <img class="w-100" id="pic_2" src="@/assets/homepage/sea.png" alt="">
+        <img class="w-100" id="pic_3" src="@/assets/homepage/lotus.png" alt="">
       </div>
       <div class="p-series col-7 text-left">
         <p>
