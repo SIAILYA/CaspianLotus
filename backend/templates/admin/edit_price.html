@@ -1,0 +1,21 @@
+{% extends 'admin/header.html' %}
+
+{% block content %}
+<form action="" method="post" novalidate enctype="multipart/form-data">
+  {{ edit_price_form.hidden_tag() }}
+  <h1 class="add-dataset-header">Изменить цену</h1>
+  <div class="input-group mb-3">
+    <span class="input-group-text">{{ edit_price_form.name.label }}</span>
+    {{ edit_price_form.name(class="form-control", value = price["name"]) }}
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text">{{ edit_price_form.count.label }}</span>
+    {{ edit_price_form.count(class="form-control", value = price["count"]) }}
+  </div>
+
+  <div class="mb-3">
+    {{ edit_price_form.submit(class="btn btn-success btn-md mb-2") }}
+  </div>
+</form>
+{% endblock %}

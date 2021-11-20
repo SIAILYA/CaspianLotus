@@ -1,0 +1,40 @@
+{% extends 'admin/header.html' %}
+
+{% block content %}
+<div class="row gy-3">
+    {% for price in prices %}
+    <div class="col-md-6 col-xl-4" style="">
+        <a href="/admin/edit_price/{{ price._id }}" class="d-flex flex-column card"
+         style="
+               color: black;
+               cursor: pointer;
+               text-align: left;
+               background-color: #d9d9d9;
+               position: relative;
+               border-radius: 5px 5px 5px 5px;
+               text-decoration: none;
+               padding: 5px;
+               margin-left: 50px;
+               margin-right: 50px;
+               margin-top: 10px;
+               height: 100%;"
+        >
+        <div
+            style="color: black; font-size: 18px; border-radius: 5px 5px 5px 5px;"
+        >
+          {% if price.name|length > 55 %}
+          {{ price.name[:55] }}...
+          {% else %}
+          {{ price.name }}
+          {% endif %}
+        </div>
+
+        <div class="new-text text-start p-3">
+          {{ price.count }}
+        </div>
+        </a>
+    </div>
+  {% endfor %}
+
+</div>
+{% endblock %}

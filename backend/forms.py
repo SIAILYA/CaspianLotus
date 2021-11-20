@@ -18,3 +18,8 @@ class EditReviewForm(FlaskForm):
     review = TextAreaField("Отзыв: ", validators=[DataRequired()])
     submit = SubmitField("Подтвердить")
 
+class EditPriceForm(FlaskForm):
+    name = StringField("Имя: ", validators=[DataRequired()])
+    count = TextAreaField("Цена: ", validators=[DataRequired()])
+    submit = SubmitField("Подтвердить")
+

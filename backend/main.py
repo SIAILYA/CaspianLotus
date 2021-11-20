@@ -18,6 +18,7 @@ db_name = "Lotos"
 
 collections_admins = client[db_name]["PhotoReports"]
 collections_reviews = client[db_name]["reviews"]
+collections_prices = client[db_name]["prices"]
 
 @app.route("/status", methods=["GET"])
 def status():
@@ -85,6 +86,30 @@ def add_admin_review():
         })
         return redirect(url_for("reviews"))
     return render_template("admin/addreview.html", form=form)
+
+@app.route('/admin/prices', methods=["GET", "POST"])
+def prices():
+    return render_template("admin/prices.html", prices=collections_prices.find())
+
+
+@app.route('/admin/edit_price/<id>', methods=["GET", "POST"])
+def edit_price(id):
+    edit_price_form = EditPriceForm()
+    price = collections_prices.find({"_id": ObjectId(id)})[0]
+    if request.method == "GET":
+        edit_price_form.count.data = price["count"]
+
+    if edit_price_form.validate_on_submit():
+        collections_prices.update_one({"_id": ObjectId(id)}, {"$set": {
+            "name": edit_price_form.name.data,
+            "count": int(edit_price_form.count.data)
+        }})
+        return redirect(url_for("prices"))
+    return render_template("admin/edit_price.html", edit_price_form=edit_price_form, price=price)
+
+@app.route('/getprices', methods=['GET'])
+def get_prices():
+    return dumps(collections_prices.find())
 
 # @app.route('/addreview', methods=["GET", "POST"])
 # def add_review():
