@@ -11,7 +11,7 @@ class MessageForm(FlaskForm):
 class AddReviewForm(FlaskForm):
     name = StringField("Имя: ", validators=[DataRequired()])
     review = TextAreaField("Отзыв: ", validators=[DataRequired()])
-    submit = SubmitField("Submit")
+    submit = SubmitField("Подтвердить")
 
 class EditReviewForm(FlaskForm):
     name = StringField("Имя: ", validators=[DataRequired()])
