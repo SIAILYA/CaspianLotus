@@ -17,7 +17,7 @@
             Контакты
           </router-link>
         </div>
-        <div :class="showPhone ? 'phone-show'  : 'phone-hide'" class="ml-0 ml-xl-5 d-none d-xl-block overflow-hidden">
+        <div :class="showPhone ? 'phone-show'  : 'phone-hide'" class="text-nowrap ml-0 ml-xl-5 d-none d-xl-block overflow-hidden">
             <a href="tel:89535823354" class="d-none phone-number text-white d-xl-block">
               +7-912-345-67-89
             </a>

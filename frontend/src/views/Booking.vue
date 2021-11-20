@@ -41,7 +41,7 @@
         <div class="col-12 col-ld-10">
           <b-row>
             <div class="col-12 col-md-5">
-              <img class="w-100" src="@/assets/houses-1.jpeg" alt="">
+              <img alt="" class="w-100" src="@/assets/houses-1.jpeg">
             </div>
             <div class="col-12 col-md-7">
 
@@ -100,5 +100,9 @@ export default {
 
 .show-price {
   height: 32px !important;
+}
+
+h1, h2, h4 {
+  color: var(--blue-main)
 }
 </style>
