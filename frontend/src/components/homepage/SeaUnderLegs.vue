@@ -4,13 +4,13 @@
     <h2 class="text-center">
       База расположена на самом берегу Каспийского моря недалеко от города Астрахань и готова предложить своим посетителям уникальный отдых!
     </h2>
-    <div class="container d-flex flex-row">
-      <div class="picture-set col-5 position-relative">
+    <div class="container d-lg-flex d-block flex-lg-row flex-column-reverse">
+      <div class="picture-set col-lg-5 col-12 position-relative">
         <img class="w-100" id="pic_1" src="@/assets/homepage/boards.png" alt="">
         <img class="w-100" id="pic_2" src="@/assets/homepage/sea.png" alt="">
         <img class="w-100" id="pic_3" src="@/assets/homepage/lotus.png" alt="">
       </div>
-      <div class="p-series col-7 text-left">
+      <div class="p-series col-lg-7 col-12 text-left my-lg-auto my-0 mt-sm-0 mt-5">
         <p>
           Собственный выход к воде прямо на базе - не нужно далеко идти
         </p>
@@ -40,7 +40,6 @@ div {
   h1 {
     font-weight: 600;
     font-size: 40px;
-    line-height: 54px;
     color: #032560;
   }
 
@@ -49,13 +48,14 @@ div {
   }
 
   .p-series {
-    margin: 160px 0;
+    margin: 15% 0;
     p {
       font-size: 22px;
     }
   }
 
   .picture-set {
+    aspect-ratio: .91;
     img {
       position: absolute;
       left: 0;
@@ -68,6 +68,23 @@ div {
     #pic_3 {
       top: 140px;
     }
+  }
+}
+@media screen and (max-width: 993px) {
+  .p-series {
+    margin: 0;
+  }
+  .picture-set {
+  }
+}
+@media screen and (max-width: 768px) {
+  .picture-set {
+    aspect-ratio: 0.95 !important;
+  }
+}
+@media screen and (max-width: 380px) {
+  .picture-set {
+    aspect-ratio: 1.5;
   }
 }
 </style>

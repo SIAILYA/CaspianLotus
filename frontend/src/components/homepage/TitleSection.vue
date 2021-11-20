@@ -1,12 +1,12 @@
 <template>
   <section class="title-section pt-5">
     <div class="container text-center mt-5">
-      <img class="col-lg-4 col-12" src="@/assets/homepage/logo.svg" alt="logo">
-      <h1>Каспийский Лотос</h1>
+      <img class="col-lg-4 col-sm-7 col-10" src="@/assets/homepage/logo.svg" alt="logo">
+      <h1 class="col-lg-0 mt-5">Каспийский Лотос</h1>
     </div>
     <div class="container mt-5 text-center">
       <h2 class="col-12 mb-5">Приезжайте к нам<br><span class="pink-text">за новыми впечатлениями</span></h2>
-      <router-link tag="div" class="to-book col-4 p-4 d-md-inline-block" to >Забронировать</router-link>
+      <router-link tag="div" class="to-book col-lg-4 col-12 p-4 d-md-inline-block" to >Забронировать</router-link>
     </div>
   </section>
 </template>
@@ -25,6 +25,7 @@ export default {
   background-size: cover;
   height: 100vh;
   border-radius: 0 0 50px 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .8);
 
   h1 {
     mix-blend-mode: screen;
@@ -46,7 +47,6 @@ export default {
     font-family: Montserrat, sans-serif;
     font-weight: 600;
     font-size: 38px;
-    line-height: 46px;
     text-align: center;
     color: rgba(255, 255, 255, .8);
     mix-blend-mode: screen;
@@ -65,6 +65,17 @@ export default {
     background: rgba(255, 67, 153, 1);
     border-radius: 40px;
     box-shadow: 0 0 24px rgba(255, 67, 153, 0.9);
+  }
+}
+
+@media screen and (max-width: 993px) {
+  .title-section {
+    h1 {
+      font-size: 46px;
+    }
+    p {
+      font-size: 36px;
+    }
   }
 }
 </style>

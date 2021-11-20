@@ -14,12 +14,12 @@
               <h4 class="mt-2 mx-auto text-center">лето 2022</h4>
               <div class="vertical-shade mt-4 mx-auto"></div>
             </div>
-            <div class="col-5 my-auto text-left">
+            <div class="col-md-5 col-10 my-auto text-left">
               <p class="">
                 Построим детскую площадку и орагнизуем инфраструктуру для сап-туров в Каспийском море
               </p>
             </div>
-            <img class="col-5 my-auto" src="@/assets/homepage/surfing.png" alt="surfing">
+            <img class="col-5 my-auto d-md-block d-none" src="@/assets/homepage/surfing.png" alt="surfing">
           </div>
           <div class="d-flex flex-row mt-5">
             <div class="col-2 text-center">
@@ -27,15 +27,15 @@
               <h4 class="mt-2">осень 2022</h4>
               <div class="vertical-shade mt-4 mx-auto"></div>
             </div>
-            <div class="col-5 my-auto text-left">
+            <div class="col-md-5 col-10 my-auto text-left">
               <p class="">
                 Оборудуем небольшую столовую на 20 человек. В разгар сезона в столовой будут подаваться блюда из свежей рыбы и дичи
               </p>
             </div>
-            <img class="col-5 my-auto" src="@/assets/homepage/food.png" alt="food">
+            <img class="col-5 my-auto d-md-block d-none" src="@/assets/homepage/food.png" alt="food">
           </div>
         </div>
-        <router-link tag="div" class="to-book col-7 text-center d-md-inline-block mx-auto p-4 mt-4 mb-4" to >Забронировать нужные даты</router-link>
+        <router-link tag="div" class="to-book col-md-7 col-sm-10 text-center d-md-inline-block mx-auto p-4 mt-4 mb-4" to >Забронировать нужные даты</router-link>
       </div>
     </section>
   </div>
@@ -57,6 +57,7 @@ section {
   margin-top: -2%;
   color: #fff;
   font-family: "Montserrat", sans-serif;
+  padding-bottom: 5px;
 h1 {
   font-weight: 600;
   font-size: 36px;

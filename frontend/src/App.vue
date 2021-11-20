@@ -31,11 +31,13 @@
       </b-container>
     </div>
     <router-view/>
+    <Footer/>
   </div>
 </template>
 
 
 <script>
+import Footer from "@/components/Footer";
 
 export default {
   data() {
@@ -58,7 +60,8 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll", this.scroll)
-  }
+  },
+  components: {Footer}
 }
 </script>
 
