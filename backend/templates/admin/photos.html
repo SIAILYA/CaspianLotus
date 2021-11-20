@@ -2,9 +2,9 @@
 
 {% block content %}
 <div class="row gy-3">
-    {% for price in prices %}
+    {% for photo in photos %}
     <div class="col-md-6 col-xl-4" style="">
-        <a href="/admin/edit_price/{{ price._id }}" class="d-flex flex-column card"
+        <a href="/admin/edit_photo/{{ photo._id }}" class="d-flex flex-column card"
          style="
                color: black;
                cursor: pointer;
@@ -19,24 +19,15 @@
                margin-top: 10px;
                height: 100%;"
         >
-        <div
-            style="color: black; font-size: 18px; border-radius: 5px 5px 5px 5px;"
-        >
-          {% if price.name|length > 55 %}
-          {{ price.name[:55] }}...
-          {% else %}
-          {{ price.name }}
-          {% endif %}
-        </div>
-
         <div class="new-text text-start p-3">
-          {{ price.count }}
+            <img src="{{ url_for('static', filename=photo.way) }}" class="w-100"/>
+
         </div>
         </a>
     </div>
   {% endfor %}
-    <div class = "text-center">
-        <a class="btn btn-success" style="margin-top: 20px" href="/admin/addprice" role="button">Добавить значение</a>
-    </div>
 </div>
+    <div class = "text-center">
+        <a class="btn btn-success" style="margin-top: 20px" href="/admin/addphoto" role="button">Добавить фото</a>
+    </div>
 {% endblock %}

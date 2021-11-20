@@ -1,0 +1,16 @@
+{% extends 'admin/header.html' %}
+
+{% block content %}
+<form action="" method="post" novalidate enctype="multipart/form-data">
+     {{ add_photo_form.hidden_tag() }}
+
+    <div class="input-group mb-3">
+    <span class="input-group-text">{{ add_photo_form.photo.label }}</span>
+    {{ add_photo_form.photo(class="form-control") }}
+  </div>
+
+  <div class="mb-3">
+    {{ add_photo_form.submit(class="btn btn-success btn-md mb-2") }}
+  </div>
+</form>
+{% endblock %}

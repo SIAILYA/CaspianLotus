@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField, csrf
-from wtforms.validators import DataRequired, Email
+from wtforms import StringField, SubmitField, TextAreaField, csrf, FileField
+from wtforms.validators import DataRequired, Email, Length
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+
 
 class MessageForm(FlaskForm):
     name = StringField("Name: ", validators=[DataRequired()])
@@ -21,5 +23,10 @@ class EditReviewForm(FlaskForm):
 class EditPriceForm(FlaskForm):
     name = StringField("Имя: ", validators=[DataRequired()])
     count = TextAreaField("Цена: ", validators=[DataRequired()])
+    submit = SubmitField("Подтвердить")
+
+class AddPhotoForm(FlaskForm):
+    photo = FileField( u'pictures',
+    validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
     submit = SubmitField("Подтвердить")
 

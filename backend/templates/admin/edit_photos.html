@@ -2,22 +2,22 @@
 
 {% block content %}
 <form action="" method="post" novalidate enctype="multipart/form-data">
-  {{ edit_price_form.hidden_tag() }}
-  <h1 class="add-dataset-header">Изменить цену</h1>
-  <div class="input-group mb-3">
-    <span class="input-group-text">{{ edit_price_form.name.label }}</span>
-    {{ edit_price_form.name(class="form-control", value = price["name"]) }}
-  </div>
+  {{ edit_photo_form.hidden_tag() }}
+  <h1 class="add-dataset-header">Изменить фото</h1>
 
   <div class="input-group mb-3">
-    <span class="input-group-text">{{ edit_price_form.count.label }}</span>
-    {{ edit_price_form.count(class="form-control", value = price["count"]) }}
+    <a>Путь: {{filename}}</a>
   </div>
+
+       <div class="new-text text-start p-3">
+            <img src="{{ url_for('static', filename=filename) }}" class="w-100"/>
+      </div>
+
 
   <div class="mb-3">
-    {{ edit_price_form.submit(class="btn btn-success btn-md mb-2") }}
+    {{ edit_photo_form.submit(class="btn btn-success btn-md mb-2") }}
     <button type="button" class="btn btn-danger btn-md mb-2" data-bs-toggle="modal" data-bs-target="#delete">
-      Удалить цену
+      Удалить фото
     </button>
     <div class="modal fade" id="delete" style="color: black" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
       <div class="modal-dialog">
@@ -27,7 +27,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            Вы действительно хотите удалить цену?
+            Вы действительно хотите удалить фото?
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
