@@ -1,23 +1,48 @@
 <template>
-  <b-container>
-    <b-navbar toggleable="lg" type="light" variant="light" class="header">
-      <b-navbar-brand href="#" class="header-logo">
-        <div class="d-flex flex-row">
-          <b-img src="@/assets/lotos_logo.svg" />
-          Каспийский<br>Лотос
+  <header class="container">
+    <div class="d-flex flex-row justify-content-between">
+      <!-- logo -->
+      <div class="logo d-flex" onclick="document.location.href = '/'">
+        <img src="@/assets/header/Logo.svg">
+        <p>Каспийский<br>Лотос</p>
+      </div>
+      <!-- contacts -->
+      <div class="contacts d-flex flex-row">
+        <img src="@/assets/header/Vk.svg" onclick="document.location.href = '#'">
+        <img src="@/assets/header/Instagram.svg" onclick="document.location.href = '#'">
+        <div class="text-center">
+          <p>+7-912-345-67-89</p>
+          <a href="#">Обратный звонок</a>
         </div>
-      </b-navbar-brand>
-      <b-navbar-nav>
-        <b-nav-item href="#" class="nav-item">О нас</b-nav-item>
-        <b-nav-item href="#" class="nav-item">Фотоотчёты</b-nav-item>
-        <b-nav-item href="#" class="nav-item">Досуг</b-nav-item>
-        <b-nav-item href="#" class="nav-item">Рыбалка</b-nav-item>
-        <b-nav-item href="#" class="nav-item">Отзывы</b-nav-item>
-        <b-nav-item href="#" class="nav-item">Карта развития</b-nav-item>
-        <b-nav-item href="#" class="nav-item">Контакты</b-nav-item>
-      </b-navbar-nav>
-    </b-navbar>
-  </b-container>
+      </div>
+    </div>
+    <!-- nav-menu -->
+    <div class="nav-menu">
+      <ul class="d-flex flex-row justify-content-around">
+        <li>
+          <a href="/">О нас</a>
+        </li>
+        <li>
+          <a href="/photo_reports">Фотоотчёты</a>
+        </li>
+        <li>
+          <a href="/leisure">Досуг</a>
+        </li>
+        <li>
+          <a href="/fishing">Рыбалка</a>
+        </li>
+        <li>
+          <a href="/reviews">Отзывы</a>
+        </li>
+        <li>
+          <a href="/roadmap">Карта развития</a>
+        </li>
+        <li>
+          <a href="/contacts">Контакты</a>
+        </li>
+      </ul>
+    </div>
+  </header>
 </template>
 
 <script>
@@ -27,25 +52,65 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.header {
-  background-color: inherit;
+header {
+  padding-top: 15px;
+}
 
-  .header-logo {
-    font-family: Montserrat, sans-serif;
-    font-style: normal;
+.logo {
+  cursor: pointer;
+
+  p {
+    margin: auto 5px;
+    font-family: "Montserrat", sans-serif;
     font-weight: 500;
-    font-size: 24px;
-    line-height: 1.5;
+    font-size: 26px;
     color: #0073A3;
+    line-height: 1;
+    letter-spacing: 2px;
   }
+}
 
-  .nav-item {
-    font-family: Montserrat, sans-serif;
-    font-style: normal;
+.contacts {
+  padding: 20px 0;
+  p {
+    margin: 0;
     font-weight: 300;
-    font-size: 18px;
-    line-height: 22px;
-    color: #272727;
+    font-size: 20px;
+  }
+  a {
+    font-weight: 200;
+    font-size: 16px;
+    text-decoration-line: underline;
+    color: #0073A3;
+    transition: 0.3s;
+  }
+  a:hover {
+    color: inherit;
+  }
+  img {
+    margin: 0 5px;
+    cursor: pointer;
+  }
+}
+
+.nav-menu {
+  margin-top: 10px;
+  ul {
+    li {
+      list-style: none;
+      float: left;
+      text-align: center;
+
+      a {
+        font-size: 22px;
+        text-decoration: none;
+        color: #272727;
+        transition: 0.2s;
+      }
+      a:hover {
+        color: #ff4399;
+      }
+    }
   }
 }
 </style>
