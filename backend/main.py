@@ -19,7 +19,6 @@ app = Flask(__name__)
 
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
-cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -36,6 +35,7 @@ collections_photos = client[db_name]["photos"]
 collections_orders = client[db_name]["orders"]
 
 login = LoginManager(app)
+cors = CORS(app)
 login.login_view = "login"
 login.init_app(app)
 
@@ -87,7 +87,7 @@ def login():
 
             if user is not None and user.check_password(password):
                 login_user(user)
-                return redirect("/admin")
+                return redirect("/admin/reviews")
         flash('Invalid username or password')
         return redirect(url_for('login'))
     return render_template('admin/login.html', title='Sign In', form=form)
@@ -145,11 +145,16 @@ def get_reviews():
     return dumps(list(collections_reviews.find())[:3])
 
 
-@app.route('/api/addreview', methods=["POST"])
+@app.route('/api/add_review', methods=["POST"])
 def add_review():
+    print(request.get_json())
     collections_reviews.insert_one({
         "name": request.get_json()["name"],
-        "review": request.get_json()["description"]
+        "review": request.get_json()["description"],
+        "photo": "",
+        "source_name": "",
+        "source_link": "",
+        "date": "2021-12-05 00:00:00"
     })
     return "OK"
 
@@ -168,6 +173,8 @@ def add_admin_review():
             "date": add_admin_review.date.data
         })
         return redirect(url_for("reviews"))
+    else:
+        print(add_admin_review.validate_on_submit())
     return render_template("admin/addreview.html", add_admin_review=add_admin_review)
 
 
@@ -452,4 +459,4 @@ def get_photos():
     return jsonify(db_photos)
 
 
-app.run(port=5099, debug=True)
+app.run(port=5099)
