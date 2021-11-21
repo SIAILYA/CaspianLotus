@@ -8,11 +8,11 @@
           <router-link active-class="current-link" class="navigation-link mt-auto mb-auto" exact to="/booking">
             Забронировать
           </router-link>
-          <router-link active-class="current-link" class="navigation-link mt-auto mb-auto" exact to="/#attraction">Досуг
-          </router-link>
-          <router-link active-class="current-link" class="navigation-link mt-auto mb-auto" exact to="/#photos">
+          <a class="navigation-link mt-auto mb-auto" href="/#attraction">Досуг
+          </a>
+          <a class="navigation-link mt-auto mb-auto" href="/#photos">
             Фотографии
-          </router-link>
+          </a>
           <router-link active-class="current-link" class="navigation-link mt-auto mb-auto mr-0" exact to="/contacts">
             Контакты
           </router-link>
