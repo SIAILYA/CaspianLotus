@@ -108,10 +108,9 @@ def edit_price(id):
         edit_price_form.count.data = price["count"]
 
     if edit_price_form.validate_on_submit():
-        if edit_price_form.validate_on_submit():
-            if "delete" in request.form:
-                collections_prices.remove({"_id": ObjectId(id)})
-                return redirect(url_for("prices"))
+        if "delete" in request.form:
+            collections_prices.remove({"_id": ObjectId(id)})
+            return redirect(url_for("prices"))
 
         collections_prices.update_one({"_id": ObjectId(id)}, {"$set": {
             "name": edit_price_form.name.data,
@@ -278,11 +277,33 @@ def admin_edit_order(id):
         edit_order_form.count.data = order["count"]
 
     if edit_order_form.validate_on_submit():
+
         standard = int(order["standard"])
         lux = int(order["lux"])
         count = int(order["count"])
         startPeriod = order["startPeriod"]
         endPeriod = order["endPeriod"]
+
+        if "delete" in request.form:
+            collections_orders.remove({"_id": ObjectId(id)})
+
+            while startPeriod != endPeriod:
+                booking_for_day = collections_booking.find_one({"date": str(startPeriod.date())})
+                collections_booking.update_one(
+                    {"$and": [{"_id": booking_for_day["_id"]}, {"orders": {"$in": [str(id)]}}]},
+                    {
+                        "$inc":
+                            {
+                                "lux": -lux,
+                                "standard": -standard
+                            },
+                        "$pull":
+                            {
+                                "orders": str(id)
+                            }
+                    })
+                startPeriod += datetime.timedelta(days=1)
+            return redirect(url_for("orders"))
 
         collections_orders.remove({"_id": ObjectId(id)})
 

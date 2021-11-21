@@ -28,8 +28,29 @@
     {{ edit_order_form.count(class="form-control") }}
   </div>
 
-  <div class="mb-3">
+    <div class="mb-3">
     {{ edit_order_form.submit(class="btn btn-success btn-md mb-2") }}
+    <button type="button" class="btn btn-danger btn-md mb-2" data-bs-toggle="modal" data-bs-target="#delete">
+      Удалить заказ
+    </button>
+    <div class="modal fade" id="delete" style="color: black" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteLabel">Подтверждение действия</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Вы действительно хотите удалить заказ?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+            <button type="submit" class="btn btn-primary" name="delete">Да</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</form>
 </form>
 {% endblock %}
