@@ -5,7 +5,7 @@
     <PlaceWithFish/>
     <LeisureForAll/>
     <Reviews/>
-    <div class="container">
+    <div class="container mb-5">
       <section class="mt-5 houses-info">
         <h2 class="text-center">Информация о домиках</h2>
         <b-row class="justify-content-center mt-5">
@@ -34,7 +34,9 @@
         </b-row>
       </section>
     </div>
-
+    <div class="container">
+      <booking-widget class="mb-4"></booking-widget>
+    </div>
     <Planing/>
     <Gallery/>
   </div>
@@ -48,10 +50,11 @@ import LeisureForAll from "@/components/homepage/LeisureForAll.vue";
 import Reviews from "@/components/homepage/Reviews";
 import Planing from "@/components/homepage/Planing";
 import Gallery from "@/components/homepage/Gallery";
+import BookingWidget from "../components/BookingWidget";
 
 export default {
   name: "Main",
-  components: {TitleSection, SeaUnderLegs, PlaceWithFish, LeisureForAll, Reviews, Planing, Gallery}
+  components: {BookingWidget, TitleSection, SeaUnderLegs, PlaceWithFish, LeisureForAll, Reviews, Planing, Gallery}
 }
 </script>
 
