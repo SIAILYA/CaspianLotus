@@ -3,12 +3,12 @@ import os
 
 from bson.json_util import dumps
 from bson.objectid import ObjectId
-from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_cors import CORS
-from pymongo import MongoClient
-from werkzeug.utils import secure_filename
 from flask_login import login_required, login_user, current_user, UserMixin, LoginManager
+from pymongo import MongoClient
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.utils import secure_filename
 
 from forms import *
 
@@ -34,7 +34,6 @@ collections_prices = client[db_name]["prices"]
 collections_booking = client[db_name]["booking"]
 collections_photos = client[db_name]["photos"]
 collections_orders = client[db_name]["orders"]
-
 
 login = LoginManager(app)
 login.login_view = "login"
@@ -445,6 +444,12 @@ def admin_edit_order(id):
             startPeriod += datetime.timedelta(days=1)
         return redirect(url_for("orders"))
     return render_template("admin/edit_order.html", edit_order_form=edit_order_form)
+
+
+@app.get("/api/get_photos")
+def get_photos():
+    db_photos = [url_for("static", filename=ph["way"]) for ph in list(collections_photos.find())]
+    return jsonify(db_photos)
 
 
 app.run(port=5099, debug=True)
