@@ -89,7 +89,7 @@
           <p>
             Уже были в Каспийском Лотосе?<br>Расскажите другим, как провели время и поделитесь фотографиями, а мы подарим Вам скидку на следующее бронирование!
           </p>
-          <router-link tag="div" class="to-book col-md-8 col-12 text-center p-3 d-inline-block rose-button" to="/booking">Рассказать</router-link>
+          <div class="to-book col-md-8 col-12 text-center p-3 d-inline-block rose-button">Рассказать</div>
         </div>
       </div>
       <div class="images col-md-5 col-12 position-relative p-2 my-auto">

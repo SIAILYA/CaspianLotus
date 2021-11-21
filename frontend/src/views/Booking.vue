@@ -86,7 +86,7 @@
           <div class="row">
             <div class="col-12 col-md-5 mb-3 mb-md-0">
               <h4>Люкс</h4>
-              <span>Номер с двумя спальными кроватями в домике из двух номеров</span>
+              <span>Целый домик в Вашем распоряжении! Два спальных места в одном домике</span>
             </div>
             <div v-if="variantsInfo.lux > 0" class="col-6 col-md-3">
               <h5>Доступно</h5>
@@ -167,7 +167,10 @@ export default {
             .then(r => {
               this.loadVariants = false
               this.variantsInfo = r.data
-            })
+            }).
+            catch(() => {
+              this.$bvModal.show("modal-2")
+        })
       }
     },
     inputBookCount(e) {
