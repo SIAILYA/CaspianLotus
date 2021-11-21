@@ -7,7 +7,8 @@ from bson.objectid import ObjectId
 from bson.json_util import dumps
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
-from bson.json_util import loads
+from flask_login import login_required, login_user, current_user, UserMixin, LoginManager
+from werkzeug.security import check_password_hash, generate_password_hash
 
 UPLOAD_FOLDER = 'static/photos/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -25,12 +26,70 @@ client = MongoClient(
 
 db_name = "Lotos"
 
-collections_admins = client[db_name]["PhotoReports"]
+collections_admins = client[db_name]["admins"]
 collections_reviews = client[db_name]["reviews"]
 collections_prices = client[db_name]["prices"]
 collections_booking = client[db_name]["booking"]
 collections_photos = client[db_name]["photos"]
 collections_orders = client[db_name]["orders"]
+
+
+login = LoginManager(app)
+login.login_view = "login"
+login.init_app(app)
+
+
+class User(UserMixin):
+
+    def __init__(self, id, username, password, name, surname, role):
+        self.password_hash = generate_password_hash(password)
+        self.username = username
+        self.name = name
+        self.id = id
+        self.surname = surname
+        self.role = role
+
+    def get_username(self):
+        return self.username
+
+    def check_password(self, password):
+        print(password)
+        print(self.password_hash)
+        return check_password_hash(self.password_hash, password)
+
+    def get_role(self):
+        return self.role
+
+    def get_id(self):
+        return self.username
+
+    @login.user_loader
+    def load_user(username):
+        loaded_user = collections_admins.find_one({"username": username})
+        return User(loaded_user["_id"], loaded_user["username"], loaded_user["password"], loaded_user["name"],
+                    loaded_user["surname"], loaded_user["role"])
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
+    form = UserForm()
+    if form.is_submitted():
+        name = form.username.data
+        password = form.password.data
+        user_db_count = collections_admins.count_documents({"username": name})
+        if user_db_count:
+            user_db = collections_admins.find_one({"username": name})
+            user = User(user_db["_id"], user_db["username"], user_db["password"], user_db["name"],
+                        user_db["surname"], user_db["role"])
+
+            if user is not None and user.check_password(password):
+                login_user(user)
+                return redirect("/admin")
+        flash('Invalid username or password')
+        return redirect(url_for('login'))
+    return render_template('admin/login.html', title='Sign In', form=form)
 
 
 @app.route("/status", methods=["GET"])
@@ -39,16 +98,19 @@ def status():
 
 
 @app.route('/admin', methods=["GET", "POST"])
+@login_required
 def index():
     return render_template("admin/header.html")
 
 
 @app.route('/admin/reviews', methods=["GET", "POST"])
+@login_required
 def reviews():
     return render_template("admin/reviews.html", reviews=collections_reviews.find())
 
 
 @app.route('/admin/edit_review/<id>', methods=["GET", "POST"])
+@login_required
 def edit_review(id):
     edit_review_form = EditReviewForm()
     review = collections_reviews.find({"_id": ObjectId(id)})[0]
@@ -84,6 +146,8 @@ def add_review():
 
 
 @app.route('/admin/addreview', methods=["GET", "POST"])
+@login_required
+@login_required
 def add_admin_review():
     form = AddReviewForm()
     if form.validate_on_submit():
@@ -96,11 +160,13 @@ def add_admin_review():
 
 
 @app.route('/admin/prices', methods=["GET", "POST"])
+@login_required
 def prices():
     return render_template("admin/prices.html", prices=collections_prices.find())
 
 
 @app.route('/admin/edit_price/<id>', methods=["GET", "POST"])
+@login_required
 def edit_price(id):
     edit_price_form = EditPriceForm()
     price = collections_prices.find({"_id": ObjectId(id)})[0]
@@ -126,6 +192,7 @@ def get_prices():
 
 
 @app.route('/admin/addprice', methods=["GET", "POST"])
+@login_required
 def add_admin_price():
     form = EditPriceForm()
     if form.validate_on_submit():
@@ -138,11 +205,13 @@ def add_admin_price():
 
 
 @app.route('/admin/photos', methods=["GET", "POST"])
+@login_required
 def photos():
     return render_template("admin/photos.html", photos=collections_photos.find())
 
 
 @app.route('/admin/edit_photo/<id>', methods=["GET", "POST"])
+@login_required
 def edit_photo(id):
     edit_photo_form = EditPriceForm()
     filename = collections_photos.find({"_id": ObjectId(id)})[0]
@@ -173,6 +242,7 @@ def allowed_file(filename):
 
 
 @app.route('/admin/addphoto', methods=["GET", "POST"])
+@login_required
 def add_admin_photo():
     add_photo_form = AddPhotoForm()
     if add_photo_form.validate_on_submit():
@@ -262,10 +332,12 @@ def confirm_booking():
     return "Confirmed"
 
 @app.route('/admin/orders', methods=["GET", "POST"])
+@login_required
 def orders():
     return render_template("admin/orders.html", orders=collections_orders.find())
 
 @app.route("/admin/edit_order/<id>", methods=["GET", "POST"])
+@login_required
 def admin_edit_order(id):
     edit_order_form = EditOrderForm()
     order = collections_orders.find({"_id": ObjectId(id)})[0]

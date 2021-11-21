@@ -1,7 +1,15 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField, csrf, FileField, DateTimeField
+from wtforms import StringField, SubmitField, TextAreaField, csrf, FileField, DateTimeField, IntegerField
 from wtforms.validators import DataRequired, Email, Length
 from flask_wtf.file import FileField, FileAllowed, FileRequired
+from wtforms.widgets import PasswordInput
+
+class UserForm(FlaskForm):
+    id = IntegerField("Индентификатор")
+    username = StringField('Логин', validators=[DataRequired()])
+    password = StringField('Пароль', widget=PasswordInput(hide_value=False))
+
+    submit = SubmitField("Войти")
 
 
 class MessageForm(FlaskForm):
