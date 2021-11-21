@@ -14,6 +14,26 @@
     {{ edit_review_form.review(class="form-control", value = review["review"]) }}
   </div>
 
+  <div class="input-group mb-3">
+    <span class="input-group-text">{{ edit_review_form.photo.label }}</span>
+    {{ edit_review_form.photo(class="form-control", value = review["photo"]) }}
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text">{{ edit_review_form.source_name.label }}</span>
+    {{ edit_review_form.source_name(class="form-control", value = review["source_name"]) }}
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text">{{ edit_review_form.source_link.label }}</span>
+    {{ edit_review_form.source_link(class="form-control", value = review["source_link"]) }}
+  </div>
+
+    <div class="input-group mb-3">
+    <span class="input-group-text">{{ edit_review_form.date.label }}</span>
+    {{ edit_review_form.date(class="form-control", value = review["date"]) }}
+  </div>
+
   <div class="mb-3">
     {{ edit_review_form.submit(class="btn btn-success btn-md mb-2") }}
     <button type="button" class="btn btn-danger btn-md mb-2" data-bs-toggle="modal" data-bs-target="#delete">

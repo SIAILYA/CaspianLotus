@@ -1,0 +1,56 @@
+{% extends 'admin/header.html' %}
+
+{% block content %}
+<form action="" method="post" novalidate enctype="multipart/form-data">
+     {{ edit_order_form.hidden_tag() }}
+    <div class="input-group mb-3">
+        <span class="input-group-text">{{ edit_order_form.startPeriod.label }}</span>
+        {{ edit_order_form.startPeriod(class="form-control") }}
+    </div>
+
+    <div class="input-group mb-3">
+    <span class="input-group-text">{{ edit_order_form.endPeriod.label }}</span>
+    {{ edit_order_form.endPeriod(class="form-control") }}
+  </div>
+
+    <div class="input-group mb-3">
+    <span class="input-group-text">{{ edit_order_form.standard.label }}</span>
+    {{ edit_order_form.standard(class="form-control") }}
+  </div>
+
+    <div class="input-group mb-3">
+    <span class="input-group-text">{{ edit_order_form.lux.label }}</span>
+    {{ edit_order_form.lux(class="form-control") }}
+  </div>
+
+    <div class="input-group mb-3">
+    <span class="input-group-text">{{ edit_order_form.count.label }}</span>
+    {{ edit_order_form.count(class="form-control") }}
+  </div>
+
+    <div class="mb-3">
+    {{ edit_order_form.submit(class="btn btn-success btn-md mb-2") }}
+    <button type="button" class="btn btn-danger btn-md mb-2" data-bs-toggle="modal" data-bs-target="#delete">
+      Удалить заказ
+    </button>
+    <div class="modal fade" id="delete" style="color: black" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteLabel">Подтверждение действия</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Вы действительно хотите удалить заказ?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+            <button type="submit" class="btn btn-primary" name="delete">Да</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+</form>
+{% endblock %}

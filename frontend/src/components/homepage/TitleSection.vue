@@ -1,7 +1,23 @@
 <template>
   <section class="title-section pt-5 pb-3">
-    <div class="container text-center mt-5">
-      <img class="col-lg-4 col-sm-7 col-10" src="@/assets/homepage/logo.svg" alt="logo">
+    <div class="container text-center mt-5 position-relative d-flex flex-column justify-content-center">
+      <div class="col-lg-4 col-sm-7 col-10 mx-auto">
+        <img src="@/assets/homepage/logo.png" class="w-100 logo-main" style="z-index: 2" alt="logo">
+        <div class="shadows-rose position-absolute" style="
+          box-shadow: 0px 0px 150px 75px #ff4399;
+          height: 1px;
+          width: 1px;
+          mix-blend-mode: screen;
+          z-index: 0;
+        "></div>
+        <div class="shadows-blue position-absolute" style="
+          box-shadow: 0px 0px 150px 65px #009393;
+          height: 0px;
+          width: 50px;
+          mix-blend-mode: screen;
+          z-index: 0;
+        "></div>
+      </div>
       <h1 class="col-lg-0 mt-5">Каспийский Лотос</h1>
     </div>
     <div class="container mt-3 mt-md-5 text-center">
@@ -18,15 +34,16 @@
       </vue-typed-js>
       <booking-widget>
       </booking-widget>
-<!--      <router-link tag="div" class="to-book col-lg-4 col-12 p-3 p-md-4 d-md-inline-block rose-button" to="/booking">-->
-<!--        Забронировать-->
-<!--      </router-link>-->
+      <!--      <router-link tag="div" class="to-book col-lg-4 col-12 p-3 p-md-4 d-md-inline-block rose-button" to="/booking">-->
+      <!--        Забронировать-->
+      <!--      </router-link>-->
     </div>
   </section>
 </template>
 
 <script>
 import BookingWidget from "../BookingWidget";
+
 export default {
   name: "TitleSection",
   components: {BookingWidget}
@@ -96,7 +113,7 @@ export default {
       font-size: 28px;
     }
 
-    .to-book{
+    .to-book {
       font-size: 26px;
     }
 
@@ -104,5 +121,41 @@ export default {
       font-size: 36px;
     }
   }
+}
+
+.shadows-rose{
+  left: 50%;
+  top: 27%;
+  animation: shakeMin 7s ease infinite;
+}
+
+.shadows-blue{
+  left: 45%;
+  top: 70%;
+  animation: shakeMin 7s ease infinite;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(2vh);
+  }
+}
+
+@keyframes shakeMin {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(1vh);
+  }
+}
+
+.logo-main{
+  animation: shake 7s ease infinite;
 }
 </style>

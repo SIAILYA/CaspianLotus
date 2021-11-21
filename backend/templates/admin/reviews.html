@@ -22,6 +22,7 @@
         <div
             style="color: black; font-size: 18px; border-radius: 5px 5px 5px 5px;"
         >
+            <nobr style="text-decoration: underline">Имя:</nobr>
           {% if review.name|length > 55 %}
           {{ review.name[:55] }}...
           {% else %}
@@ -30,12 +31,46 @@
         </div>
 
         <div class="new-text text-start p-3">
-          {% if review.review|length > 140 %}
-          {{ review.review[:140] }}...
+            <nobr style="text-decoration: underline">Отзыв:</nobr>
+          {% if review.review|length > 55 %}
+          {{ review.review[:55] }}...
           {% else %}
           {{ review.review }}
           {% endif %}
         </div>
+
+         <div class="new-text text-start p-3">
+             <nobr style="text-decoration: underline">Аватар:</nobr>
+          {% if review.photo|length > 140 %}
+          {{ review.photo[:140] }}...
+          {% else %}
+          {{ review.photo }}
+          {% endif %}
+        </div>
+
+        <div class="new-text text-start p-3">
+            <nobr style="text-decoration: underline">Название источника:</nobr>
+          {% if review.source_name|length > 140 %}
+          {{ review.source_name[:140] }}...
+          {% else %}
+          {{ review.source_name }}
+          {% endif %}
+        </div>
+
+          <div class="new-text text-start p-3">
+              <nobr style="text-decoration: underline">Ссылка на источник:</nobr>
+          {% if review.source_link|length > 140 %}
+          {{ review.source_link[:140] }}...
+          {% else %}
+          {{ review.source_link }}
+          {% endif %}
+        </div>
+
+          <div class="new-text text-start p-3">
+              <nobr style="text-decoration: underline">Дата:</nobr>
+          {{ review.date }}
+        </div>
+
         </a>
     </div>
 
