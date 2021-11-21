@@ -6,16 +6,16 @@
           <h2>
             Отображаемое имя
           </h2>
-          <input type="text">
+          <input v-model="name" type="text">
         </div>
         <div class="mt-2">
           <h2>
             Текст отзыва
           </h2>
-          <textarea rows="3" class="w-100">
+          <textarea v-model="review" rows="3" class="w-100">
           </textarea>
         </div>
-        <input type="file">
+<!--        <input type="file">-->
       </form>
       <b-button
           variant="primary"
@@ -24,13 +24,6 @@
           @click="ok()"
       >
         Отправить
-      </b-button>
-      <b-button
-          size="sm"
-          class="form-button cancel-button float-right pl-3 pr-3 mt-2"
-          @click="cancel()"
-      >
-        Отменить
       </b-button>
     </b-modal>
     <h1>
@@ -84,7 +77,8 @@
             Уже были в Каспийском Лотосе?<br>Расскажите другим, как провели время и поделитесь фотографиями, а мы
             подарим Вам скидку на следующее бронирование!
           </p>
-          <b-button tag="div" class="to-book col-md-8 col-12 text-center p-3 d-inline-block rose-button" v-b-modal.leave_feedback>Рассказать</b-button>
+          <b-button tag="div" class="to-book col-md-8 col-12 text-center p-3 d-inline-block rose-button" :disabled="sended_req" @click="$bvModal.show('leave_feedback')">
+            {{ !sended_req ? "Рассказать" : "Спасибо!" }}</b-button>
         </div>
       </div>
       <div class="images col-md-5 col-12 position-relative p-2 my-auto">
@@ -104,7 +98,10 @@ export default {
   data() {
     return {
       reviews: [],
-      loading: false
+      loading: false,
+      sended_req: false,
+      name: "",
+      review: ""
     }
   },
   methods: {
@@ -114,6 +111,11 @@ export default {
         this.loading = false
         console.log(r.data)
         this.reviews = r.data
+      })
+    },
+    ok() {
+      axios.post(BACKEND + "/api/add_review", {name: this.name, description: this.review}).then(r => {
+        console.log(r)
       })
     }
   },
