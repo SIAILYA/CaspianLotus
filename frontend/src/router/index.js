@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Main from "@/views/Main";
 import Contacts from "@/views/Contacts";
 import Booking from "@/views/Booking";
+import Vr from "../views/Vr";
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/contacts',
     name: 'Contacts',
     component: Contacts
+  },
+  {
+    path: '/vr',
+    name: 'Vr',
+    component: Vr
   }
 ]
 

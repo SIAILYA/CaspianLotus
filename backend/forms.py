@@ -21,10 +21,10 @@ class MessageForm(FlaskForm):
 class AddReviewForm(FlaskForm):
     name = StringField("Имя: ", validators=[DataRequired()])
     review = TextAreaField("Отзыв: ", validators=[DataRequired()])
-    photo = TextAreaField("Аватар: ", validators=[DataRequired()])
+    photo = TextAreaField("Аватар: ")
     date = DateTimeField("Дата: ", validators=[DataRequired()])
-    source_name = TextAreaField("Название источника: ", validators=[DataRequired()])
-    source_link = TextAreaField("Ссылка на источник: ", validators=[DataRequired()])
+    source_name = TextAreaField("Название источника: ")
+    source_link = TextAreaField("Ссылка на источник: ")
     submit = SubmitField("Подтвердить")
 
 class EditReviewForm(FlaskForm):

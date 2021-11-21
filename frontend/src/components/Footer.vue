@@ -1,5 +1,5 @@
 <template>
-  <section id="footer">
+  <section id="footer" class="mt-3">
     <div class="container text-center p-4 d-md-flex flex-md-row flex-column">
       <div class="col-md-4 col-12 row text-md-left text-center mb-md-0 mb-3 ">
         <img class="col-5" src="@/assets/footer/logo.svg" alt="logo">
