@@ -1,5 +1,5 @@
 <template>
-  <b-container class="header-pt text-center">
+  <b-container class="header-pt booking text-center">
     <b-modal id="modal-1" title="Спасибо!" no-close-on-esc no-close-on-backdrop hide-header-close ok-only>
       <p class="my-2 text-center">
         //После редиректа на платежную систему и обратно//
@@ -64,11 +64,11 @@
               <h4>Стандарт</h4>
               <span>Номер с двумя спальными кроватями в домике из двух номеров</span>
             </div>
-            <div class="col-6 col-md-3">
+            <div v-if="variantsInfo.standard > 0" class="col-6 col-md-3">
               <h5>Доступно</h5>
               <span class="available">{{ variantsInfo.standard }}</span>
             </div>
-            <div class="col-6 col-md-4">
+            <div v-if="variantsInfo.standard > 0" class="col-6 col-md-4">
               <h5>Количество бронирования</h5>
               <input @input.prevent="inputBookCount"
                      data-type="standard"
@@ -78,6 +78,9 @@
                      :value="toBookStandard"
               >
             </div>
+            <div v-else class="col-12 col-md-7 d-flex">
+              <h4 class="m-auto">К сожалению, на выбранные даты нет свободных номеров</h4>
+            </div>
           </div>
           <hr>
           <div class="row">
@@ -85,11 +88,11 @@
               <h4>Люкс</h4>
               <span>Номер с двумя спальными кроватями в домике из двух номеров</span>
             </div>
-            <div class="col-6 col-md-3">
+            <div v-if="variantsInfo.lux > 0" class="col-6 col-md-3">
               <h5>Доступно</h5>
               <span class="available">{{ variantsInfo.lux }}</span>
             </div>
-            <div class="col-6 col-md-4">
+            <div v-if="variantsInfo.lux > 0" class="col-6 col-md-4">
               <h5>Количество бронирования</h5>
               <input @input.prevent="inputBookCount"
                      data-type="lux"
@@ -99,46 +102,22 @@
                      :value="toBookLux"
               >
             </div>
+            <div v-else class="col-12 col-md-7 d-flex">
+              <h4 class="m-auto">К сожалению, на выбранные даты нет свободных номеров</h4>
+            </div>
           </div>
         </div>
       </div>
     </b-row>
     <button class="rose-button mt-4" v-if="!loadVariants && variantsInfo"
             :disabled="(toBookLux === '0' && toBookStandard === '0') || sending" @click="confirmBooking">
-      Перейти к оплате
+      Дальше
     </button>
     <br>
     <b-spinner v-if="sending" type="grow" class="mt-3"></b-spinner>
     <div class="mt-3" v-if="(toBookLux === '0' && toBookStandard === '0') && variantsInfo && !loadVariants ">Выберете
       количество номеров для бронирования!
     </div>
-    <section class="mt-5 houses-info">
-      <h2>Информация о домиках</h2>
-      <b-row class="justify-content-center mt-5">
-        <div class="col-12 col-ld-10">
-          <b-row>
-            <div class="col-12 col-md-5">
-              <img alt="" class="houses-photo-1 w-100" src="@/assets/houses-1.jpeg">
-            </div>
-            <div class="col-12 d-flex col-md-7 houses-text text-center text-md-left">
-              <span class="my-auto">
-                В нашем распоряжении 24 уютных домика, в каждом из которых может с комфортом поместиться 2 человека. Во всех домиках есть всё для длительного пребывания - санузел, сплит-система и небольшая кухня
-              </span>
-            </div>
-          </b-row>
-          <b-row>
-            <div class="col-12 d-flex col-md-7 houses-text text-center text-md-left">
-              <span class="my-auto">
-                Рядом с домиками есть пространство на свежем воздухе, где установлены беседки и мангалы для приготовления шашлыка и рыбы
-              </span>
-            </div>
-            <div class="col-12 col-md-5">
-              <img alt="" class="houses-photo-2 w-100" src="@/assets/houses-2.jpeg">
-            </div>
-          </b-row>
-        </div>
-      </b-row>
-    </section>
   </b-container>
 </template>
 
@@ -223,6 +202,14 @@ export default {
       })
     }
   },
+  mounted() {
+    if (Object.keys(this.$route.query).length > 1) {
+      this.count = this.$route.query.co || null
+      this.dateEnd = this.$route.query.en || null
+      this.dateStart = this.$route.query.st || this.getTomorrow()
+      this.onChangeInfo()
+    }
+  }
 }
 </script>
 
@@ -250,35 +237,6 @@ h1, h2, h4, h3, h5 {
   color: var(--blue-main)
 }
 
-.houses-info {
-  img {
-    border-radius: 35px;
-    box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.25);
-  }
-
-  .houses-photo-1 {
-    transform: rotate(8deg);
-    transition: all .3s ease;
-  }
-
-  .houses-photo-1:hover {
-    transform: rotate(5deg) scale(1.01);
-  }
-
-  .houses-photo-2 {
-    transform: rotate(-5deg);
-    transition: all .3s ease;
-  }
-
-  .houses-photo-2:hover {
-    transform: rotate(2deg) scale(1.01);
-  }
-
-  .houses-text {
-    font-size: 24px;
-  }
-}
-
 .show-variants {
   height: auto !important;
 }
@@ -292,5 +250,9 @@ h1, h2, h4, h3, h5 {
 
 .available {
   font-size: 24px;
+}
+
+.booking{
+  min-height: 100vh;
 }
 </style>
