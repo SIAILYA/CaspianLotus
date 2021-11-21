@@ -118,6 +118,10 @@ def edit_review(id):
     review = collections_reviews.find({"_id": ObjectId(id)})[0]
     if request.method == "GET":
         edit_review_form.review.data = review["review"]
+        edit_review_form.photo.data = review["photo"]
+        edit_review_form.source_name.data = review["source_name"]
+        edit_review_form.source_link.data = review["source_link"]
+        edit_review_form.date.data = review["date"]
 
     if edit_review_form.validate_on_submit():
         if "delete" in request.form:
@@ -126,7 +130,11 @@ def edit_review(id):
 
         collections_reviews.update_one({"_id": ObjectId(id)}, {"$set": {
             "name": edit_review_form.name.data,
-            "review": edit_review_form.review.data
+            "review": edit_review_form.review.data,
+            "photo": edit_review_form.photo.data,
+            "source_name": edit_review_form.source_name.data,
+            "source_link": edit_review_form.source_link.data,
+            "date": str(edit_review_form.date.data)
         }})
 
         return redirect(url_for("reviews"))
@@ -149,16 +157,19 @@ def add_review():
 
 @app.route('/admin/addreview', methods=["GET", "POST"])
 @login_required
-@login_required
 def add_admin_review():
-    form = AddReviewForm()
-    if form.validate_on_submit():
+    add_admin_review = AddReviewForm()
+    if add_admin_review.validate_on_submit():
         collections_reviews.insert_one({
-            "name": form.name.data,
-            "review": form.review.data
+            "name": add_admin_review.name.data,
+            "review": add_admin_review.review.data,
+            "photo": add_admin_review.photo.data,
+            "source_name": add_admin_review.source_name.data,
+            "source_link": add_admin_review.source_link.data,
+            "date": add_admin_review.date.data
         })
         return redirect(url_for("reviews"))
-    return render_template("admin/addreview.html", form=form)
+    return render_template("admin/addreview.html", add_admin_review=add_admin_review)
 
 
 @app.route('/admin/prices', methods=["GET", "POST"])
@@ -223,20 +234,6 @@ def edit_photo(id):
         return redirect(url_for("photos"))
 
     return render_template("admin/edit_photos.html", edit_photo_form=edit_photo_form, filename=filename["way"])
-
-
-def add_admin_photo():
-    add_photo_form = AddPhotoForm()
-    if add_photo_form.validate_on_submit():
-        photo = add_photo_form.photo
-        if photo and allowed_file(photo.data.filename):
-            filename = secure_filename(photo.data.filename)
-            photo.data.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            collections_photos.insert_one({
-                'way': 'photos/' + filename
-            })
-            return redirect(url_for("photos"))
-    return render_template("admin/addphoto.html", add_photo_form=add_photo_form)
 
 
 def allowed_file(filename):
