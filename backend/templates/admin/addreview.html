@@ -2,19 +2,40 @@
 
 {% block content %}
 <form action="" method="post" novalidate enctype="multipart/form-data">
-     {{ form.hidden_tag() }}
-    <div class="input-group mb-3">
-        <span class="input-group-text">{{ form.name.label }}</span>
-        {{ form.name(class="form-control") }}
-    </div>
+     {{ add_admin_review.hidden_tag() }}
 
     <div class="input-group mb-3">
-    <span class="input-group-text">{{ form.review.label }}</span>
-    {{ form.review(class="form-control") }}
+    <span class="input-group-text">{{ add_admin_review.name.label }}</span>
+    {{ add_admin_review.name(class="form-control")}}
+  </div>
+
+    <div class="input-group mb-3">
+    <span class="input-group-text">{{ add_admin_review.review.label }}</span>
+    {{ add_admin_review.review(class="form-control")}}
+  </div>
+
+    <div class="input-group mb-3">
+    <span class="input-group-text">{{ add_admin_review.photo.label }}</span>
+    {{ add_admin_review.photo(class="form-control")}}
+  </div>
+
+    <div class="input-group mb-3">
+    <span class="input-group-text">{{ add_admin_review.source_name.label }}</span>
+    {{ add_admin_review.source_name(class="form-control")}}
+  </div>
+
+    <div class="input-group mb-3">
+    <span class="input-group-text">{{ add_admin_review.source_link.label }}</span>
+    {{ add_admin_review.source_link(class="form-control")}}
+  </div>
+
+    <div class="input-group mb-3">
+    <span class="input-group-text">{{ add_admin_review.date.label }}</span>
+    {{ add_admin_review.date(class="form-control")}}
   </div>
 
   <div class="mb-3">
-    {{ form.submit(class="btn btn-success btn-md mb-2") }}
+    {{ add_admin_review.submit(class="btn btn-success btn-md mb-2") }}
   </div>
 </form>
 {% endblock %}
