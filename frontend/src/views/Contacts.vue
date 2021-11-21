@@ -99,6 +99,11 @@ input[type="text"] {
   border: none;
   border-bottom: 1px solid #000000;
 }
+input[type="text"]:focus {
+  outline:none;
+  border: none;
+  border-bottom: 1px solid #000000;
+}
 input[type="submit"] {
   font-family: Montserrat, sans-serif;
   font-weight: 600;

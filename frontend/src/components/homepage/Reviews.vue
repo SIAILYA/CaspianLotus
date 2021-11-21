@@ -1,5 +1,38 @@
 <template>
   <div class="container text-center mt-5" id="reviews">
+    <b-modal hide-footer title="Оставить отзыв" id="leave_feedback">
+      <form>
+        <div class="w-50">
+          <h2>
+            Отображаемое имя
+          </h2>
+          <input type="text">
+        </div>
+        <div class="mt-2">
+          <h2>
+            Текст отзыва
+          </h2>
+          <textarea rows="3" class="w-100">
+          </textarea>
+        </div>
+        <input type="file">
+      </form>
+      <b-button
+          variant="primary"
+          size="sm"
+          class="form-button float-right rose-button to-book pl-3 pr-3 m-2"
+          @click="ok()"
+      >
+        Отправить
+      </b-button>
+      <b-button
+          size="sm"
+          class="form-button cancel-button float-right pl-3 pr-3 mt-2"
+          @click="cancel()"
+      >
+        Отменить
+      </b-button>
+    </b-modal>
     <h1>
       Отзывы
     </h1>
@@ -51,7 +84,7 @@
             Уже были в Каспийском Лотосе?<br>Расскажите другим, как провели время и поделитесь фотографиями, а мы
             подарим Вам скидку на следующее бронирование!
           </p>
-          <div class="to-book col-md-8 col-12 text-center p-3 d-inline-block rose-button">Рассказать</div>
+          <b-button tag="div" class="to-book col-md-8 col-12 text-center p-3 d-inline-block rose-button" v-b-modal.leave_feedback>Рассказать</b-button>
         </div>
       </div>
       <div class="images col-md-5 col-12 position-relative p-2 my-auto">
@@ -190,6 +223,31 @@ div {
 
   #pic_2 {
     top: 160px;
+  }
+}
+#leave_feedback {
+  input[type="text"], textarea {
+    border: none;
+    border-bottom: 1px solid #000000;
+  }
+  input[type="text"]:focus, textarea:focus {
+    outline:none;
+    border: none;
+    border-bottom: 1px solid #000000;
+  }
+  h2 {
+    font-weight: 500;
+    font-size: 12px;
+  }
+  .form-button {
+    font-size: 16px;
+    line-height: 30px;
+    border-radius: 20px;
+  }
+  .cancel-button {
+    background: #5F5F5F;
+    font-family: Montserrat, sans-serif;
+    font-weight: 600;
   }
 }
 </style>
