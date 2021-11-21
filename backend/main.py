@@ -1,14 +1,16 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
-from pymongo import MongoClient
 import datetime
 import os
-from forms import *
-from bson.objectid import ObjectId
+
 from bson.json_util import dumps
+from bson.objectid import ObjectId
+from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
 from flask_cors import CORS
+from pymongo import MongoClient
 from werkzeug.utils import secure_filename
 from flask_login import login_required, login_user, current_user, UserMixin, LoginManager
 from werkzeug.security import check_password_hash, generate_password_hash
+
+from forms import *
 
 UPLOAD_FOLDER = 'static/photos/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -131,12 +133,12 @@ def edit_review(id):
     return render_template("admin/edit_review.html", edit_review_form=edit_review_form, review=review)
 
 
-@app.route('/getreviews', methods=['GET'])
+@app.route('/api/getreviews', methods=['GET'])
 def get_reviews():
-    return dumps(collections_reviews.find())
+    return dumps(list(collections_reviews.find())[:3])
 
 
-@app.route('/addreview', methods=["POST"])
+@app.route('/api/addreview', methods=["POST"])
 def add_review():
     collections_reviews.insert_one({
         "name": request.get_json()["name"],
@@ -270,6 +272,9 @@ def booking_check():
     max_lux_not_allowed = 0
     max_standard_not_allowed = 0
 
+    if (endPeriod - startPeriod).days > 20:
+        return "fail", 403
+
     while startPeriod != endPeriod:
         booking_for_day = collections_booking.find_one({"date": str(startPeriod.date())})
 
@@ -295,6 +300,9 @@ def confirm_booking():
     startPeriod = datetime.datetime.strptime(booking_info["dateStart"], "%Y-%m-%d")
     startPeriodNE = datetime.datetime.strptime(booking_info["dateStart"], "%Y-%m-%d")
     endPeriod = datetime.datetime.strptime(booking_info["dateEnd"], "%Y-%m-%d")
+
+    if (endPeriod - startPeriod).days > 20:
+        return "fail", 403
 
     order_id = collections_orders.insert_one({"standard": standard,
                                               "lux": lux,
@@ -331,10 +339,12 @@ def confirm_booking():
 
     return "Confirmed"
 
+
 @app.route('/admin/orders', methods=["GET", "POST"])
 @login_required
 def orders():
     return render_template("admin/orders.html", orders=collections_orders.find())
+
 
 @app.route("/admin/edit_order/<id>", methods=["GET", "POST"])
 @login_required

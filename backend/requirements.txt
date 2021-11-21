@@ -3,3 +3,4 @@ flask
 pymongo
 wtforms
 flask_wtf
+flask_login
