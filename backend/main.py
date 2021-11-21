@@ -20,8 +20,8 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-
-client = MongoClient("mongodb+srv://MindlessDoc:K.,k.Nbntxrb228!@cluster0.ctgti.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+client = MongoClient(
+    "mongodb+srv://MindlessDoc:K.,k.Nbntxrb228!@cluster0.ctgti.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 
 db_name = "Lotos"
 
@@ -37,9 +37,11 @@ collections_orders = client[db_name]["orders"]
 def status():
     return "Caspian Lotus API is working"
 
+
 @app.route('/admin', methods=["GET", "POST"])
 def index():
     return render_template("admin/header.html")
+
 
 @app.route('/admin/reviews', methods=["GET", "POST"])
 def reviews():
@@ -80,6 +82,7 @@ def add_review():
     })
     return "OK"
 
+
 @app.route('/admin/addreview', methods=["GET", "POST"])
 def add_admin_review():
     form = AddReviewForm()
@@ -90,6 +93,7 @@ def add_admin_review():
         })
         return redirect(url_for("reviews"))
     return render_template("admin/addreview.html", form=form)
+
 
 @app.route('/admin/prices', methods=["GET", "POST"])
 def prices():
@@ -120,6 +124,7 @@ def edit_price(id):
 @app.route('/api/get_prices', methods=['GET'])
 def get_prices():
     return dumps(collections_prices.find())
+
 
 @app.route('/admin/addprice', methods=["GET", "POST"])
 def add_admin_price():
@@ -162,6 +167,7 @@ def add_admin_photo():
             })
             return redirect(url_for("photos"))
     return render_template("admin/addphoto.html", add_photo_form=add_photo_form)
+
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -255,6 +261,87 @@ def confirm_booking():
         startPeriod += datetime.timedelta(days=1)
 
     return "Confirmed"
+
+@app.route('/admin/orders', methods=["GET", "POST"])
+def orders():
+    return render_template("admin/orders.html", orders=collections_orders.find())
+
+@app.route("/admin/edit_order/<id>", methods=["GET", "POST"])
+def admin_edit_order(id):
+    edit_order_form = EditOrderForm()
+    order = collections_orders.find({"_id": ObjectId(id)})[0]
+    if request.method == "GET":
+        edit_order_form.startPeriod.data = order["startPeriod"]
+        edit_order_form.endPeriod.data = order["endPeriod"]
+        edit_order_form.standard.data = order["standard"]
+        edit_order_form.lux.data = order["lux"]
+        edit_order_form.count.data = order["count"]
+
+    if edit_order_form.validate_on_submit():
+        standard = int(order["standard"])
+        lux = int(order["lux"])
+        count = int(order["count"])
+        startPeriod = order["startPeriod"]
+        endPeriod = order["endPeriod"]
+
+        collections_orders.remove({"_id": ObjectId(id)})
+
+        while startPeriod != endPeriod:
+            booking_for_day = collections_booking.find_one({"date": str(startPeriod.date())})
+            collections_booking.update_one({"$and": [{"_id": booking_for_day["_id"]}, {"orders": {"$in": [str(id)]}}]},
+                                           {
+                                               "$inc":
+                                                   {
+                                                       "lux": -lux,
+                                                       "standard": -standard
+                                                   },
+                                               "$pull":
+                                                   {
+                                                       "orders": str(id)
+                                                   }
+                                           })
+            startPeriod += datetime.timedelta(days=1)
+
+        standard = int(edit_order_form.standard.data)
+        lux = int(edit_order_form.lux.data)
+        count = int(edit_order_form.count.data)
+
+        startPeriod = edit_order_form.startPeriod.data
+        endPeriod = edit_order_form.endPeriod.data
+
+        order_id = collections_orders.insert_one({"standard": standard,
+                                                  "lux": lux,
+                                                  "count": count,
+                                                  "startPeriod": startPeriod,
+                                                  "endPeriod": endPeriod}).inserted_id
+
+        while startPeriod != endPeriod:
+            booking_for_day = collections_booking.find_one({"date": str(startPeriod.date())})
+
+            if booking_for_day is None:
+                collections_booking.insert_one({
+                    "date": str(startPeriod.date()),
+                    "lux": int(lux),
+                    "standard": int(standard),
+                    "count": count,
+                    "orders": [str(order_id)]
+                })
+            else:
+                collections_booking.update_one({"_id": booking_for_day["_id"]},
+                                               {
+                                                   "$inc":
+                                                       {
+                                                           "lux": lux,
+                                                           "standard": standard
+                                                       },
+                                                   "$push":
+                                                       {
+                                                           "orders": str(order_id)
+                                                       }
+                                               })
+            startPeriod += datetime.timedelta(days=1)
+        return redirect(url_for("orders"))
+    return render_template("admin/edit_order.html", edit_order_form=edit_order_form)
 
 
 app.run(port=5099, debug=True)

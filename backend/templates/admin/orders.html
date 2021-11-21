@@ -1,0 +1,47 @@
+{% extends 'admin/header.html' %}
+
+{% block content %}
+<div class="row gy-3">
+    {% for order in orders %}
+    <div class="col-md-6 col-xl-4" style="">
+        <a href="/admin/edit_order/{{ order._id }}" class="d-flex flex-column card"
+         style="
+               color: black;
+               cursor: pointer;
+               text-align: left;
+               background-color: #d9d9d9;
+               position: relative;
+               border-radius: 5px 5px 5px 5px;
+               text-decoration: none;
+               padding: 5px;
+               margin-left: 50px;
+               margin-right: 50px;
+               margin-top: 10px;
+               height: 100%;"
+        >
+
+        <div class="new-text text-start p-3">
+            Стандартных номеров: <nobr style="font-weight:bold"> {{ order.standard }} </nobr>
+        </div>
+
+        <div class="new-text text-start p-3">
+            Люксов: <nobr style="font-weight:bold"> {{ order.lux }} </nobr>
+        </div>
+
+        <div class="new-text text-start p-3">
+            Количество людей: <nobr style="font-weight:bold"> {{ order.count }} </nobr>
+        </div>
+
+        <div class="new-text text-start p-3">
+            Начало: <nobr style="color: green"> {{ order.startPeriod }} </nobr>
+        </div>
+
+        <div class="new-text text-start p-3">
+            Конец: <nobr style="color: red"> {{ order.endPeriod }} </nobr>
+        </div>
+
+        </a>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

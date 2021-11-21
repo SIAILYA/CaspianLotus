@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField, csrf, FileField
+from wtforms import StringField, SubmitField, TextAreaField, csrf, FileField, DateTimeField
 from wtforms.validators import DataRequired, Email, Length
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 
@@ -28,5 +28,13 @@ class EditPriceForm(FlaskForm):
 class AddPhotoForm(FlaskForm):
     photo = FileField( u'pictures',
     validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
+    submit = SubmitField("Подтвердить")
+
+class EditOrderForm(FlaskForm):
+    startPeriod = DateTimeField("Начало: ", validators=[DataRequired()])
+    endPeriod = DateTimeField("Конец: ", validators=[DataRequired()])
+    standard = TextAreaField("Стандартныx номеров: ", validators=[DataRequired()])
+    lux = TextAreaField("Люксов: ", validators=[DataRequired()])
+    count = TextAreaField("Количество людей: ", validators=[DataRequired()])
     submit = SubmitField("Подтвердить")
 
