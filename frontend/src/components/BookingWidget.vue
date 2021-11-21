@@ -12,7 +12,8 @@
       </div>
       <div class="col-8 col-md-3 mt-3 mt-md-0">
         <span>Количество гостей</span>
-        <b-form-select ref="count" v-model="count" :options="['1 гость', '2 гостя', '3 гостя', '4 гостя', '5 гостей', '6 гостей', '7 гостей', '8 гостей', '9 гостей']"></b-form-select>
+        <b-form-select ref="count" v-model="count"
+                       :options="['1 гость', '2 гостя', '3 гостя', '4 гостя', '5 гостей', '6 гостей', '7 гостей', '8 гостей', '9 гостей']"></b-form-select>
       </div>
       <div class="col-12 col-md-3 mt-3 mt-md-0 d-flex">
         <button @click="goToBooking" class="rose-button submit mt-auto mx-auto">Бронировать!</button>
@@ -49,10 +50,10 @@ export default {
             this.$refs.dateEnd.focus()
           }
         } else {
-            this.$refs.dateStart.focus()
+          this.$refs.dateStart.focus()
         }
       } else {
-            this.$refs.count.focus()
+        this.$refs.count.focus()
       }
     }
   },
@@ -65,7 +66,8 @@ export default {
   box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.25);
   border-radius: 35px;
   padding: 20px;
-  span{
+
+  span {
     font-size: 18px;
     font-weight: 300;
   }
@@ -78,16 +80,28 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
-  .arrive{
+  .arrive {
     padding-right: .25rem;
   }
 
-  .depart{
+  .depart {
     padding-left: .25rem;
   }
 }
 
-h3{
+@media screen and (max-width: 992px) and (min-width: 768px) {
+  .booking-widget {
+    span {
+      font-size: 14px;
+    }
+  }
+  .submit{
+    font-size: 16px;
+  }
+
+}
+
+h3 {
   color: var(--blue-main)
 }
 </style>
