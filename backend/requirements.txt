@@ -4,3 +4,4 @@ pymongo
 wtforms
 flask_wtf
 flask_login
+flask_cors
